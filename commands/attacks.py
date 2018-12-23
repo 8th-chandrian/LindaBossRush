@@ -16,7 +16,6 @@ def load_attack_data():
 @when("use reason", context='attacking.greg')
 @when("use reason", context='attacking.pionteks')
 @when("use reason", context='attacking.tilly')
-@when("use reason", context='attacking.greg')
 def use_reason():
     attack_data = attacks['use_reason']
     if get_context() == 'attacking.tilly':

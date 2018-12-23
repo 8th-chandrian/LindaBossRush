@@ -1,4 +1,4 @@
-import adventurelib
+from adventurelib import *
 
 from commands import attacks
 
@@ -24,7 +24,7 @@ def init_game_data():
 
 def main():
     init_game_data()
-    adventurelib.start()
+    start()
 
 
 def enemy_turn(custom_function):
