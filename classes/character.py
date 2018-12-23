@@ -6,6 +6,7 @@ class character:
         self.name = name
         self.max_health = health
         self.health_remaining = health
+        self.damage_boost = 1.0
         self.custom_function = custom_function
 
     def decrement_health(self, health_lost):

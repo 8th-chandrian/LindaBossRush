@@ -40,6 +40,7 @@ def use_item(item):
         if item_data.name.lower() == 'dark chocolate':
             character_mom.health += 50
         elif item_data.name.lower() == 'coffee':
+            character_mom.damage_boost = 1.2
             # TODO: Finish implementing
     enemy_turn(character_enemy.custom_function)
 
