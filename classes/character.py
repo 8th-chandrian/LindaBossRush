@@ -1,13 +1,14 @@
-class character:
+class Character:
 
     # TODO: Finish implementing class
 
-    def __init__(self, name, health, custom_function):
+    def __init__(self, name, health):
         self.name = name
         self.max_health = health
         self.health_remaining = health
         self.damage_boost = 1.0
-        self.custom_function = custom_function
+        self.damage_boost_turns_remaining = 0
+        self.active_effect = None
 
     def decrement_health(self, health_lost):
         print(f'{self.name} took {health_lost} points of damage')
