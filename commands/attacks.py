@@ -26,8 +26,7 @@ def use_reason():
     if get_context() == 'attacking.tilly':
         print('It has no effect. Tilly is a cat. Duh.')
         return
-    print(attack_data.text)
-    character_enemy.decrement_health(20)
+    character_enemy.decrement_health(attack_data.damage * character_mom.damage_boost)
     # TODO: finish writing method
     enemy_turn(character_enemy.custom_function)
 
