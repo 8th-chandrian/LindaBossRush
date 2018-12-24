@@ -143,8 +143,8 @@ def drink_red_wine():
 @when("eat out at jojo", context='break')
 def eat_out():
     print_delayed('Linda went out and got dinner at Jojo', standard_delay)
-    print_delayed('It was a really good dinner. Linda\'s base health increased by 20 points!', standard_delay)
-    character_mom.max_health += 20
+    print_delayed('It was a really good dinner. Linda healed 60 points of damage!', standard_delay)
+    increment_health(character_mom, 60)
     start_battle()
 
 
@@ -175,7 +175,7 @@ def use_reason():
         return
 
     attack_data = dict_attacks[Attacks.USE_REASON]
-    if get_context() == 'attacking.tilly':
+    if get_context() == 'attacking.Tilly':
         print_delayed('It has no effect. Tilly is a cat. Duh.', standard_delay)
         enemy_turn()
         return
@@ -263,6 +263,79 @@ def give_good_advice():
         return
 
 
+@when("insist on paying for dinner", context='attacking.The Piontek Siblings')
+def insist_dinner_linda():
+    if apply_active_effect(character_mom):
+        if battle_over:
+            return
+        else:
+            enemy_turn()
+            return
+    if battle_over:
+        return
+
+    attack_data = dict_attacks[Attacks.INSIST_DINNER_LINDA]
+    damage = attack_data.damage * character_mom.damage_boost
+    print_delayed('Linda used "insist on paying for dinner"', standard_delay)
+    print_delayed('The Piontek Siblings feel bad for not paying', standard_delay)
+    print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}', standard_delay)
+    decrement_health(character_enemy, damage)
+    if battle_over:
+        return
+    else:
+        enemy_turn()
+        return
+
+
+@when("change the subject", context='attacking.The Piontek Siblings')
+def change_subject():
+    if apply_active_effect(character_mom):
+        if battle_over:
+            return
+        else:
+            enemy_turn()
+            return
+    if battle_over:
+        return
+
+    attack_data = dict_attacks[Attacks.CHANGE_SUBJECT]
+    damage = attack_data.damage * character_mom.damage_boost
+    print_delayed('Linda used "change the subject"', standard_delay)
+    print_delayed('Linda changed the subject to talk about something besides politics.', standard_delay)
+    print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}', standard_delay)
+    decrement_health(character_enemy, damage)
+    if battle_over:
+        return
+    else:
+        enemy_turn()
+        return
+
+@when("yay!", context='attacking.The Piontek Siblings')
+@when("yay!", context='attacking.Noah')
+def yay():
+    if apply_active_effect(character_mom):
+        if battle_over:
+            return
+        else:
+            enemy_turn()
+            return
+    if battle_over:
+        return
+
+    attack_data = dict_attacks[Attacks.YAY]
+    healing = attack_data.damage
+    print_delayed('Linda used "yay!"', standard_delay)
+    print_delayed(f'Linda was happy! Linda healed {healing} points of damage!', standard_delay)
+    increment_health(character_enemy, healing)
+    if battle_over:
+        return
+    else:
+        enemy_turn()
+        return
+
+
+
+
 @when("bake chocolate chip cookies", context='attacking.Gabe')
 @when("bake chocolate chip cookies", context='attacking.Store-Bought Chocolate Chip Cookies')
 def bake_cookies():
@@ -314,10 +387,10 @@ def use_item(item):
         print_delayed(f'Linda used {item}', standard_delay)
         if item.lower() == 'dark chocolate':
             print_delayed('Linda was healed for 20 points!', standard_delay)
-            character_mom.heal(20)
+            increment_health(character_mom, 20)
         elif item.lower() == 'coffee':
             print_delayed('Linda got wired! Linda\'s attack damage increased!', standard_delay)
-            character_mom.damage_boost += 0.2
+            character_mom.damage_boost += 0.5
         else:
             print_delayed("ERROR: SOMETHING GOT MESSED UP!!!!!", standard_delay)
     enemy_turn()
@@ -464,7 +537,7 @@ def init_attack_data():
     dict_attacks[Attacks.COOKIES] = Attack(Attacks.COOKIES, 0, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.KICK] = Attack(Attacks.KICK, 40, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.BACH] = Attack(Attacks.BACH, 0, Targets.ENEMY, Effects.NONE)
-    dict_attacks[Attacks.YAY] = Attack(Attacks.YAY, 0, Targets.SELF, Effects.NONE)
+    dict_attacks[Attacks.YAY] = Attack(Attacks.YAY, 15, Targets.SELF, Effects.NONE)
     dict_attacks[Attacks.BIG_SALE] = Attack(Attacks.BIG_SALE, 20, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.GIVE_ADVICE] = Attack(Attacks.GIVE_ADVICE, 15, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.INCORRECT_REFERENCE] = (Attacks.INCORRECT_REFERENCE, 15, Targets.ENEMY, Effects.NONE)
@@ -472,8 +545,8 @@ def init_attack_data():
     dict_attacks[Attacks.LONG_TIME_MAKEUP] = Attack(Attacks.LONG_TIME_MAKEUP, 10, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.WATER_DOWN_COFFEE] = Attack(Attacks.WATER_DOWN_COFFEE, 15, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.INSIST_ON_UBER] = Attack(Attacks.INSIST_ON_UBER, 17, Targets.ENEMY, Effects.NONE)
-    dict_attacks[Attacks.CHANGE_SUBJECT] = Attack(Attacks.CHANGE_SUBJECT, 10, Targets.ENEMY, Effects.NONE)
-    dict_attacks[Attacks.INSIST_DINNER_LINDA] = Attack(Attacks.INSIST_DINNER_LINDA, 17, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.CHANGE_SUBJECT] = Attack(Attacks.CHANGE_SUBJECT, 17, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.INSIST_DINNER_LINDA] = Attack(Attacks.INSIST_DINNER_LINDA, 13, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.AIR_CANNON] = Attack(Attacks.AIR_CANNON, 5, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.CALL_GABE] = Attack(Attacks.CALL_GABE, 15, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.YELL_AT_TILLY] = Attack(Attacks.YELL_AT_TILLY, 10, Targets.ENEMY, Effects.NONE)
@@ -515,8 +588,8 @@ def init_attack_data():
 
 def init_character_data():
     dict_enemies[greg_name] = Character(greg_name, 100, [mild_sexism, sell_company, ignore_advice, blame_linda], dict_effects[Effects.NONE])
-    dict_enemies[pionteks_name] = Character(pionteks_name, 100, [], dict_effects[Effects.NONE])
-    dict_enemies[tilly_name] = Character(tilly_name, 50, None, dict_effects[Effects.NONE])
+    dict_enemies[pionteks_name] = Character(pionteks_name, 100, [vote_trump, insist_dinner_siblings, pick_on_linda], dict_effects[Effects.NONE])
+    dict_enemies[tilly_name] = Character(tilly_name, 50, [scarf_and_barf, dead_mouse, alive_mouse, hairball], dict_effects[Effects.NONE])
     dict_enemies[noah_name] = Character(noah_name, 100, None, dict_effects[Effects.NONE])
     dict_enemies[gabe_name] = Character(gabe_name, 100, None, dict_effects[Effects.NONE])
     dict_enemies[cookies_name] = Character(cookies_name, -1, None, dict_effects[Effects.NONE])
@@ -566,7 +639,7 @@ def enemy_turn():
 
 
     if character_mom.active_effect.name == Effects.SUPER_RELAXED:
-        print_delayed(f'{character_enemy.name} tried to attack, but Linda is so relaxed from the red wine that she is invincible!', standard_delay)
+        print_delayed(f'\n\n{character_enemy.name} tried to attack, but Linda is so relaxed from the red wine that she is invincible!', standard_delay)
         print_delayed('Linda took no damage!', standard_delay)
     else:
         next_attack()
@@ -580,8 +653,6 @@ def start_battle():
     set_context(new_context)
     print_delayed('\n\nNext combatant:', 3)
     print_delayed(f'{character_enemy.name}!!!!\n\n', next_attack_delay)
-    print_delayed('Ready...', next_attack_delay)
-    print_delayed('Fight!', next_attack_delay)
 
 
 def end_battle(losing_character):
