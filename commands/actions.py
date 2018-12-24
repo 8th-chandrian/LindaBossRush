@@ -1,10 +1,4 @@
-import copy
-
-from adventurelib import *
-
-from app.enums import *
 from app.linda_boss_rush import *
-from classes.attack import Attack
 
 
 #########################################
@@ -19,7 +13,7 @@ def brew_coffee():
     start_battle()
 
 
-@when("go to Wegmans", context='break')
+@when("go to wegmans", context='break')
 def go_to_wegmans():
     print('Linda went to Wegmans and bought dark chocolates.')
     print('Two dark chocolates have been added to your inventory!')
@@ -36,7 +30,7 @@ def drink_red_wine():
     start_battle()
 
 
-@when("eat out at Jojo", context='break')
+@when("eat out at jojo", context='break')
 def eat_out():
     print('Linda went out and got dinner at Jojo')
     print('It was a really good dinner. Linda\'s base health increased by 20 points!')
@@ -44,7 +38,7 @@ def eat_out():
     start_battle()
 
 
-@when("go to Body Pump class", context='break')
+@when("go to body pump class", context='break')
 def go_to_body_pump():
     print('Linda went to Body Pump.')
     print('Linda got PUMPED! Linda\'s attack damage increased!')
@@ -228,24 +222,3 @@ def view_inventory():
 
 
 
-#########################################
-#           Enemy Attacks               #
-#########################################
-
-##### Greg's Attacks #####
-
-def mild_sexism():
-    attack_data = dict_attacks[Attacks.MILD_SEXISM]
-    damage = attack_data.damage * character_enemy.damage_boost
-    print('Greg used "mild sexism"')
-    print('Greg said something mildly sexist! (Come on, dude...)')
-    print(f'{character_enemy.name} did {damage} points of damage to Linda')
-    character_mom.decrement_health(damage)
-
-def sell_company():
-    attack_data = dict_attacks[Attacks.SELL_COMPANY]
-    damage = attack_data.damage * character_enemy.damage_boost
-    print('Greg used "sell company"')
-    print('Greg sold Brand Integrity! Linda now works for Reward Gateway...what a cruddy name')
-    print(f'{character_enemy.name} did {damage} points of damage to Linda')
-    character_mom.decrement_health(damage)

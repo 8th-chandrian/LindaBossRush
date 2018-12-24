@@ -1,40 +1,16 @@
 import copy
 import random
 import sys
+
 from adventurelib import *
 
-from classes.attack import *
 from app.Constants import *
 from app.enums import *
+from app.globals import *
+from classes.attack import Attack
 from classes.character import Character
 from classes.effect import *
-from app.enums import Effects, Attacks, Targets
-from classes.attack import Attack
-from classes.effect import Effect
-from app.enums import *
-from classes.effect import *
-from commands import actions
-from commands.actions import mild_sexism, sell_company
-
-greg_name = 'Greg'
-pionteks_name = 'The Piontek Siblings'
-tilly_name = 'Tilly'
-noah_name = 'Noah'
-gabe_name = 'Gabe'
-cookies_name = 'Store-Bought Chocolate Chip Cookies'
-
-character_mom = None
-inventory = []
-character_enemy = None
-dict_enemies = {}
-dict_effects = {}
-dict_attacks = {}
-enemy_order = [greg_name, pionteks_name, tilly_name, noah_name, gabe_name, cookies_name]
-current_character_enemy_index = 0
-score = 0
-
-num_turns_in_battle = 0
-battle_over = False
+from commands.enemy_attacks import mild_sexism, sell_company
 
 
 def prompt():
@@ -119,13 +95,13 @@ def init_attack_data():
 
 def init_character_data():
     dict_enemies[greg_name] = Character(greg_name, 100, [mild_sexism, sell_company])
-    dict_enemies[pionteks_name] = Character(pionteks_name, 100)
-    dict_enemies[tilly_name] = Character(tilly_name, 50)
-    dict_enemies[noah_name] = Character(noah_name, 100)
-    dict_enemies[gabe_name] = Character(gabe_name, 100)
-    dict_enemies[cookies_name] = Character(cookies_name, -1)
+    dict_enemies[pionteks_name] = Character(pionteks_name, 100, None)
+    dict_enemies[tilly_name] = Character(tilly_name, 50, None)
+    dict_enemies[noah_name] = Character(noah_name, 100, None)
+    dict_enemies[gabe_name] = Character(gabe_name, 100, None)
+    dict_enemies[cookies_name] = Character(cookies_name, -1, None)
     global character_mom
-    character_mom = Character('Linda', 100)
+    character_mom = Character('Linda', 100, None)
 
 def init_effect_data():
     dict_effects[Effects.NONE] = Effect(Effects.NONE, '', -1)
@@ -141,12 +117,6 @@ def print_start_of_game_text():
     print(intro_text)
     print(instructions)
 
-
-def print_end_game_text():
-    print(instant_kill)
-    print(congrats)
-    print('You have defeated all bosses! Your total score is', score, end='!')
-    print(list_of_rewards)
 
 def enemy_turn():
     '''
@@ -175,41 +145,6 @@ def enemy_turn():
     return
 
 
-def end_battle(losing_character):
-    '''
-    This function is called when a fight ends. It handles the cases where the enemy lost, and where Mom lost
-    '''
-    global num_turns_in_battle
-    global character_enemy
-    global current_character_enemy_index
-    if losing_character is character_mom:
-        print(game_over)
-        sys.exit()
-
-    # First, print out character defeat info
-    if losing_character is dict_enemies[tilly_name] and num_turns_in_battle == 10:
-        print('Because Tilly escaped defeat, Linda did not gain any points')
-    else:
-        global score
-        score += 10
-        # TODO: Increment Mom's points here and print notification of current points held
-
-    if character_enemy == dict_enemies[cookies_name]:
-        print_end_game_text()
-        sys.exit()
-
-    # Set the next enemy Mom will face, and reset her damage boost and active effect. Set context to 'break' to enable
-    # break actions
-    num_turns_in_battle = 0
-    current_character_enemy_index += 1
-    character_enemy = dict_enemies[enemy_order[current_character_enemy_index]]
-    set_context('break')
-    character_mom.damage_boost = 1.0
-    character_mom.active_effect = Effects.NONE
-    global battle_over
-    battle_over = True
-
-
 def start_battle():
     global battle_over
     battle_over = False
@@ -218,16 +153,3 @@ def start_battle():
     print(f'Next combatant: {character_enemy.name}!!!!')
     print('Ready...')
     print('Fight!')
-
-
-def main():
-    init_game_data()
-    set_context('attacking.greg')
-    global character_enemy
-    character_enemy = dict_enemies['Greg']
-    print_start_of_game_text()
-    start()
-
-
-if __name__ == '__main__':
-    main()

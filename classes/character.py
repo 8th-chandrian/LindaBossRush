@@ -1,7 +1,7 @@
 import random
 
 from app.enums import Effects
-from app.linda_boss_rush import end_battle, dict_effects, battle_over
+from app.globals import dict_effects, battle_over, end_battle
 
 
 class Character:
