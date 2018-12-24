@@ -1,6 +1,7 @@
 import sys
 from adventurelib import *
 
+from app.Constants import *
 from app.enums import Effects
 from classes.effect import Effect
 from commands import actions
@@ -39,6 +40,15 @@ def init_game_data():
     init_character_data()
     return
 
+def init_attack_data():
+    # TODO: This will instantiate attack objects for each individual attack and put them in the attacks dict, indexed by
+    # attack name
+    dict_attacks[Attacks.USE_REASON] = Attack('use reason', 15, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.]
+
+    return
+
+
 
 def init_character_data():
 
@@ -51,12 +61,12 @@ def init_effect_data():
     dict_effects[Effects.SKIP_NEXT_TURN] = Effect(Effects.SKIP_NEXT_TURN, 'Linda lost a turn!', -1)
     dict_effects[Effects.SUPER_RELAXED] = Effect(Effects.SUPER_RELAXED, 'Linda became super relaxed!\nLinda is now invincible!', 2)
 
-def init_attack_data():
-
-    return
 
 def print_start_of_game_text():
     # TODO: Print out start of game text (banner, introduction, instructions, etc.)
+    print(title_banner)
+    print(intro_text)
+    print(instructions)
 
 def print_new_enemy_text():
     
@@ -96,7 +106,7 @@ def end_battle(losing_character):
     if losing_character is character_mom:
         print("You were defeated! Oh no...")
         # TODO: switch 'Game Over' to ASCII art text
-        print("GAME OVER")
+        print(game_over)
         sys.exit()
 
     # First, print out character defeat info
