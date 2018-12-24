@@ -28,7 +28,7 @@ class Character:
             return
         else:
             self.health_remaining -= health_lost
-            return False
+            return
 
 
     def increment_health(self, health_gained):

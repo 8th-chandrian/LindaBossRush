@@ -133,6 +133,31 @@ def close_sale():
         enemy_turn()
         return
 
+
+@when("give good advice", context='attacking.Greg')
+def give_good_advice():
+    if character_mom.apply_active_effect():
+        if battle_over:
+            return
+        else:
+            enemy_turn()
+            return
+    if battle_over:
+        return
+
+    attack_data = dict_attacks[Attacks.GIVE_ADVICE]
+    damage = attack_data.damage * character_mom.damage_boost
+    print('Linda used "give good advice"')
+    print('Linda gave Greg some good advice! He said thanks and immediately ignored it, to his own detriment...')
+    print(f'Linda did {damage} points of damage to {character_enemy.name}')
+    character_enemy.decrement_health(damage)
+    if battle_over:
+        return
+    else:
+        enemy_turn()
+        return
+
+
 @when("bake chocolate chip cookies", context='attacking.Gabe')
 @when("bake chocolate chip cookies", context='attacking.Store-Bought Chocolate Chip Cookies')
 def bake_cookies():
@@ -145,13 +170,24 @@ def bake_cookies():
     if battle_over:
         return
 
-    attack_data = dict_attacks[Attacks.COOKIES]
     print('Linda used "bake chocolate chip cookies"')
     if character_enemy == dict_enemies[cookies_name]:
         print(instant_kill)
         print('The store-bought cookies could not compete!')
-        print_end_game_text()
-        sys.exit()
+        end_battle(character_enemy)
+    elif character_enemy == dict_enemies[gabe_name]:
+        if character_enemy.active_effect.name == Effects.LOW_BLOOD_SUGAR:
+            print('Gabe was cured of his low blood sugar! Gabe\'s attack returned to normal.')
+            character_enemy.active_effect = dict_effects[Effects.NONE]
+            character_enemy.damage_boost = 1.0
+        else:
+            print('Gabe was prevented from getting low blood sugar for 10 more turns.')
+            global num_turns_in_battle
+            num_turns_in_battle = 0
+    enemy_turn()
+    return
+
+
 
 
 @when("use ITEM", context='attacking')
@@ -195,3 +231,13 @@ def view_inventory():
 #########################################
 #           Enemy Attacks               #
 #########################################
+
+##### Greg's Attacks #####
+
+def mild_sexism():
+    attack_data = dict_attacks[Attacks.MILD_SEXISM]
+    damage = damage = attack_data.damage * character_enemy.damage_boost
+    print('Greg used "mild sexism"')
+    print('Greg said something mildly sexist! (Come on, dude...)')
+    print(f'{character_enemy.name} did {damage} points of damage to Linda')
+    character_mom.decrement_health(damage)

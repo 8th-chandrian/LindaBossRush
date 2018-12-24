@@ -138,8 +138,6 @@ def print_start_of_game_text():
     print(intro_text)
     print(instructions)
 
-def print_new_enemy_text():
-
 
 def print_end_game_text():
 
@@ -165,10 +163,11 @@ def enemy_turn():
 
 
     if character_mom.active_effect.name == Effects.SUPER_RELAXED:
-        print('Linda is super relaxed from the red wine. Linda is invincible!')
-
-
-    # TODO: Finish implementing (need to add functionality for other effects and picking random effect/doing damage)
+        print(f'{character_enemy.name} tried to attack, but Linda is so relaxed from the red wine that she is invincible!')
+        print('Linda took no damage!')
+    else:
+        next_attack()
+    return
 
 
 def end_battle(losing_character):
@@ -180,11 +179,16 @@ def end_battle(losing_character):
         sys.exit()
 
     # First, print out character defeat info
-    if losing_character is dict_enemies['Tilly'] and num_turns_in_battle == 10:
-        print('Because Tilly ran outside, Linda did not gain any points')
+    if losing_character is dict_enemies[tilly_name] and num_turns_in_battle == 10:
+        print('Because Tilly escaped defeat, Linda did not gain any points')
     else:
-        print(f'{losing_character.name} was defeated!')
+        global score
+        score += 10
         # TODO: Increment Mom's points here and print notification of current points held
+
+    if character_enemy == dict_enemies[cookies_name]:
+        print_end_game_text()
+        sys.exit()
 
     # Set the next enemy Mom will face, and reset her damage boost and active effect. Set context to 'break' to enable
     # break actions
