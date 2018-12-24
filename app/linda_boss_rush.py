@@ -30,6 +30,7 @@ dict_effects = {}
 dict_attacks = {}
 enemy_order = [greg_name, pionteks_name, tilly_name, noah_name, gabe_name, cookies_name]
 current_character_enemy_index = 0
+score = 0
 
 num_turns_in_battle = 0
 battle_over = False
@@ -62,7 +63,7 @@ def init_game_data():
 def init_attack_data():
     # Linda's Attacks
     dict_attacks[Attacks.USE_REASON] = Attack(Attacks.USE_REASON, 15, Targets.ENEMY, Effects.NONE)
-    dict_attacks[Attacks.COOKIES] = Attack(Attacks.COOKIES, 10, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.COOKIES] = Attack(Attacks.COOKIES, 0, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.KICK] = Attack(Attacks.KICK, 40, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.BACH] = Attack(Attacks.BACH, 0, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.YAY] = Attack(Attacks.YAY, 0, Targets.SELF, Effects.NONE)
@@ -142,8 +143,10 @@ def print_new_enemy_text():
 
 
 def print_end_game_text():
-
-
+    print(instant_kill)
+    print(congrats)
+    print('You have defeated all bosses! Your total score is', score, end='!')
+    print(list_of_rewards)
 
 def enemy_turn():
     '''
