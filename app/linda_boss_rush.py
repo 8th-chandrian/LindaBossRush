@@ -26,12 +26,20 @@ def init_game_data():
     items = []
     dict_enemies = {}
     dict_effects = {}
+    dict_attacks = {}
     mom_attacks = {}
 
     init_effect_data()
     attacks.init_attack_data()
     init_character_data()
     return
+
+def init_attack_data():
+    # TODO: This will instantiate attack objects for each individual attack and put them in the attacks dict, indexed by
+    # attack name
+    dict_attcks[Attacks.USE_REASON] = Attack('use reason', 15, Targets.ENEMY, Effects.NONE)
+    return
+
 
 
 def init_character_data():

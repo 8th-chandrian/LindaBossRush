@@ -14,3 +14,5 @@ class Effects(Enum):
     POISON = 4
     LOW_BLOOD_SUGAR = 5
     NONE = 6
+
+class Attacks(Enum):

@@ -4,14 +4,6 @@ from app.enums import *
 from app.linda_boss_rush import *
 from classes.attack import Attack
 
-attacks_data = {}
-
-def init_attack_data():
-    # TODO: This will instantiate attack objects for each individual attack and put them in the attacks dict, indexed by
-    # attack name
-    use_reason_attack = Attack('use reason', 15, Targets.ENEMY, Effects.NONE)
-    attacks_data[use_reason_attack.name] = use_reason_attack
-    return
 
 
 #########################################
