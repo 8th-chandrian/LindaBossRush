@@ -61,21 +61,29 @@ def go_to_body_pump():
 @when("use reason", context='attacking.The Piontek Siblings')
 @when("use reason", context='attacking.Tilly')
 def use_reason():
+    if character_mom.apply_active_effect():
+        enemy_turn()
+        return
     attack_data = dict_attacks['use reason']
     if get_context() == 'attacking.tilly':
         print('It has no effect. Tilly is a cat. Duh.')
+        enemy_turn()
         return
     character_enemy.decrement_health(attack_data.damage * character_mom.damage_boost)
-    # TODO: finish writing method
-    enemy_turn(character_enemy.custom_function)
+    enemy_turn()
+    return
 
 
 @when("use ITEM", context='attacking')
 def use_item(item):
+    if character_mom.apply_active_effect():
+        enemy_turn()
+        return
     if item not in inventory:
         print(f'You do not have any {item}')
         return
     else:
+        inventory.remove(item)
         print(f'Linda used {item}')
         if item.lower() == 'dark chocolate':
             print('Linda was healed for 20 points!')
@@ -83,7 +91,10 @@ def use_item(item):
         elif item.lower() == 'coffee':
             print('Linda got wired! Linda\'s attack damage increased!')
             character_mom.damage_boost += 0.2
-    enemy_turn(character_enemy.custom_function)
+        else:
+            print("ERROR: SOMETHING GOT MESSED UP!!!!!")
+    enemy_turn()
+    return
 
 
 @when("view inventory")
@@ -91,6 +102,7 @@ def view_inventory():
     print("Your inventory contains:")
     for item in inventory:
         print(f'\t{item}')
+    return
 
 
 
