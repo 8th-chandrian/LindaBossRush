@@ -181,6 +181,7 @@ def use_reason():
         return
     else:
         print_delayed('Linda used "use reason"', standard_delay)
+        print_delayed('Linda was rational and mature.', standard_delay)
         damage = attack_data.damage * character_mom.damage_boost
         print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}', standard_delay)
         decrement_health(character_enemy, damage)
