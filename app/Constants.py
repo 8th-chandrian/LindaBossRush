@@ -1,4 +1,4 @@
-title_banner = '''                                                                                                                                
+title_banner_1 = '''                                                                                                                                
 LLLLLLLLLLL                  IIIIIIIIII     NNNNNNNN        NNNNNNNN     DDDDDDDDDDDDD                            AAA                        
 L:::::::::L                  I::::::::I     N:::::::N       N::::::N     D::::::::::::DDD                        A:::A                       
 L:::::::::L                  I::::::::I     N::::::::N      N::::::N     D:::::::::::::::DD                     A:::::A                      
@@ -16,6 +16,8 @@ L::::::::::::::::::::::L     I::::::::I     N::::::N       N:::::::N     D::::::
 L::::::::::::::::::::::L     I::::::::I     N::::::N        N::::::N     D::::::::::::DDD           A:::::A                 A:::::A          
 LLLLLLLLLLLLLLLLLLLLLLLL     IIIIIIIIII     NNNNNNNN         NNNNNNN     DDDDDDDDDDDDD             AAAAAAA                   AAAAAAA         
 
+'''
+title_banner_2 = '''
    SSSSSSSSSSSSSSS      UUUUUUUU     UUUUUUUU     PPPPPPPPPPPPPPPPP        EEEEEEEEEEEEEEEEEEEEEE     RRRRRRRRRRRRRRRRR                      
  SS:::::::::::::::S     U::::::U     U::::::U     P::::::::::::::::P       E::::::::::::::::::::E     R::::::::::::::::R                     
 S:::::SSSSSS::::::S     U::::::U     U::::::U     P::::::PPPPPP:::::P      E::::::::::::::::::::E     R::::::RRRRRR:::::R                    
@@ -33,6 +35,8 @@ S::::::SSSSSS:::::S       UU:::::::::::::UU       P::::::::P               E::::
 S:::::::::::::::SS          UU:::::::::UU         P::::::::P               E::::::::::::::::::::E     R::::::R     R:::::R                   
  SSSSSSSSSSSSSSS              UUUUUUUUU           PPPPPPPPPP               EEEEEEEEEEEEEEEEEEEEEE     RRRRRRRR     RRRRRRR                   
 
+'''
+title_banner_3 = '''
 UUUUUUUU     UUUUUUUU     LLLLLLLLLLL                  TTTTTTTTTTTTTTTTTTTTTTT     RRRRRRRRRRRRRRRRR                       AAA               
 U::::::U     U::::::U     L:::::::::L                  T:::::::::::::::::::::T     R::::::::::::::::R                     A:::A              
 U::::::U     U::::::U     L:::::::::L                  T:::::::::::::::::::::T     R::::::RRRRRR:::::R                   A:::::A             
@@ -50,6 +54,8 @@ UU:::::U     U:::::UU     LL:::::::LL                  T:::::TT:::::::TT:::::T  
     UU:::::::::UU         L::::::::::::::::::::::L           T:::::::::T           R::::::R     R:::::R      A:::::A                 A:::::A 
       UUUUUUUUU           LLLLLLLLLLLLLLLLLLLLLLLL           TTTTTTTTTTT           RRRRRRRR     RRRRRRR     AAAAAAA                   AAAAAAA
 
+'''
+title_banner_4 = '''
 MMMMMMMM               MMMMMMMM     EEEEEEEEEEEEEEEEEEEEEE             GGGGGGGGGGGGG                    AAA                                  
 M:::::::M             M:::::::M     E::::::::::::::::::::E          GGG::::::::::::G                   A:::A                                 
 M::::::::M           M::::::::M     E::::::::::::::::::::E        GG:::::::::::::::G                  A:::::A                                
@@ -67,6 +73,8 @@ M::::::M               M::::::M     E::::::::::::::::::::E        GG::::::::::::
 M::::::M               M::::::M     E::::::::::::::::::::E          GGG::::::GGG:::G      A:::::A                 A:::::A                    
 MMMMMMMM               MMMMMMMM     EEEEEEEEEEEEEEEEEEEEEE             GGGGGG   GGGG     AAAAAAA                   AAAAAAA                   
 
+'''
+title_banner_5 = '''
 BBBBBBBBBBBBBBBBB             OOOOOOOOO             SSSSSSSSSSSSSSS         SSSSSSSSSSSSSSS                                                  
 B::::::::::::::::B          OO:::::::::OO         SS:::::::::::::::S      SS:::::::::::::::S                                                 
 B::::::BBBBBB:::::B       OO:::::::::::::OO      S:::::SSSSSS::::::S     S:::::SSSSSS::::::S                                                 
@@ -84,6 +92,8 @@ B:::::::::::::::::B       OO:::::::::::::OO      S::::::SSSSSS:::::S     S::::::
 B::::::::::::::::B          OO:::::::::OO        S:::::::::::::::SS      S:::::::::::::::SS                                                  
 BBBBBBBBBBBBBBBBB             OOOOOOOOO           SSSSSSSSSSSSSSS         SSSSSSSSSSSSSSS                                                    
 
+'''
+title_banner_6 = '''
 RRRRRRRRRRRRRRRRR        UUUUUUUU     UUUUUUUU        SSSSSSSSSSSSSSS      HHHHHHHHH     HHHHHHHHH                                           
 R::::::::::::::::R       U::::::U     U::::::U      SS:::::::::::::::S     H:::::::H     H:::::::H                                           
 R::::::RRRRRR:::::R      U::::::U     U::::::U     S:::::SSSSSS::::::S     H:::::::H     H:::::::H                                           
@@ -101,6 +111,8 @@ R::::::R     R:::::R       UU:::::::::::::UU       S::::::SSSSSS:::::S     H::::
 R::::::R     R:::::R         UU:::::::::UU         S:::::::::::::::SS      H:::::::H     H:::::::H                                           
 RRRRRRRR     RRRRRRR           UUUUUUUUU            SSSSSSSSSSSSSSS        HHHHHHHHH     HHHHHHHHH                                           
 
+'''
+title_banner_7 = '''
  222222222222222              000000000            1111111             888888888                                                             
 2:::::::::::::::22          00:::::::::00         1::::::1           88:::::::::88                                                           
 2::::::222222:::::2       00:::::::::::::00      1:::::::1         88:::::::::::::88                                                         
@@ -122,6 +134,19 @@ RRRRRRRR     RRRRRRR           UUUUUUUUU            SSSSSSSSSSSSSSS        HHHHH
 intro_text = '''
 You, Linda Piontek, must beat up all the bosses, for some reason that definitely matters,
 and not just in service of some puns and a good time on Christmas.
+'''
+
+greg_intro_text_1 = '''
+Your first opponent...
+
+'''
+greg_intro_text_2 = '''
+GREG'''
+greg_intro_text_3 = '''
+"THE LEADER MAN"'''
+greg_intro_text_4 = '''
+LEDERMAN!!!!!
+
 '''
 
 instructions = '''
