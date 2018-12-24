@@ -123,7 +123,8 @@ def init_character_data():
     dict_enemies[noah_name] = Character(noah_name, 100)
     dict_enemies[gabe_name] = Character(gabe_name, 100)
     dict_enemies[cookies_name] = Character(cookies_name, -1)
-    global character_mom = Character('Linda', 100)
+    global character_mom
+    character_mom = Character('Linda', 100)
 
 def init_effect_data():
     dict_effects[Effects.NONE] = Effect(Effects.NONE, '', -1)
