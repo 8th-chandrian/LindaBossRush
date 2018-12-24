@@ -1,9 +1,8 @@
 import sys
-
-import adventurelib
 from adventurelib import *
 
 from app.enums import Effects
+from classes.effect import Effect
 from commands import attacks
 
 global character_mom
@@ -12,6 +11,7 @@ global items
 global character_enemy
 global dict_enemies
 global dict_effects
+global dict_attacks
 
 global num_turns_in_battle
 
@@ -28,10 +28,11 @@ def init_game_data():
     items = []
     dict_enemies = {}
     dict_effects = {}
+    dict_attacks = {}
     mom_attacks = {}
 
     init_effect_data()
-    attacks.init_attack_data()
+    init_attack_data()
     init_character_data()
     return
 
@@ -40,7 +41,16 @@ def init_character_data():
 
 
 def init_effect_data():
+    dict_effects[Effects.NONE] = Effect(Effects.NONE, '', -1)
+    dict_effects[Effects.CONFUSION] = Effect(Effects.CONFUSION, 'Linda became confused!', 3)
+    dict_effects[Effects.LOW_BLOOD_SUGAR] = Effect(Effects.LOW_BLOOD_SUGAR, 'Gabe got low blood sugar!\nGsbe\'s attack increased 50%!', -1)
+    dict_effects[Effects.POISON] = Effect(Effects.POISON, 'Linda was poisoned by Noah\'s farts!', 3)
+    dict_effects[Effects.SKIP_NEXT_TURN] = Effect(Effects.SKIP_NEXT_TURN, 'Linda lost a turn!', -1)
+    dict_effects[Effects.SUPER_RELAXED] = Effect(Effects.SUPER_RELAXED, 'Linda became super relaxed!\nLinda is now invincible!', 2)
 
+def init_attack_data():
+
+    return
 
 def print_start_of_game_text():
     # TODO: Print out start of game text (banner, introduction, instructions, etc.)
@@ -48,6 +58,7 @@ def print_start_of_game_text():
 def main():
     init_game_data()
     set_context('attacking.greg')
+    character_enemy = dict_enemies['Greg']
     print_start_of_game_text()
     start()
 
@@ -80,6 +91,7 @@ def end_battle(losing_character):
         # TODO: switch 'Game Over' to ASCII art text
         print("GAME OVER")
         sys.exit()
+
 
 
 
