@@ -3,15 +3,24 @@ from adventurelib import *
 
 from app.enums import Effects
 from classes.effect import Effect
-from commands import attacks
+from commands import actions
 
-global character_mom
-global mom_attacks
-global items
-global character_enemy
-global dict_enemies
-global dict_effects
-global dict_attacks
+greg_name = 'Greg'
+pionteks_name = 'The Piontek Siblings'
+tilly_name = 'Tilly'
+noah_name = 'Noah'
+gabe_name = 'Gabe'
+cookies_name = 'Store-Bought Chocolate Chip Cookies'
+
+character_mom = None
+mom_attacks = {}
+inventory = []
+character_enemy = None
+dict_enemies = {}
+dict_effects = {}
+dict_attacks = {}
+enemy_order = [greg_name, pionteks_name, tilly_name, noah_name, gabe_name, cookies_name]
+current_character_enemy_index = 0
 
 global num_turns_in_battle
 
@@ -25,12 +34,6 @@ def init_game_data():
 
     We will also initialize the dict of attacks within attacks.py by calling the 'load_attack_data' function
     '''
-    items = []
-    dict_enemies = {}
-    dict_effects = {}
-    dict_attacks = {}
-    mom_attacks = {}
-
     init_effect_data()
     init_attack_data()
     init_character_data()
@@ -55,9 +58,13 @@ def init_attack_data():
 def print_start_of_game_text():
     # TODO: Print out start of game text (banner, introduction, instructions, etc.)
 
+def print_new_enemy_text():
+    
+
 def main():
     init_game_data()
     set_context('attacking.greg')
+    global character_enemy
     character_enemy = dict_enemies['Greg']
     print_start_of_game_text()
     start()
@@ -92,7 +99,24 @@ def end_battle(losing_character):
         print("GAME OVER")
         sys.exit()
 
+    # First, print out character defeat info
+    print(f'{losing_character.name} was defeated!')
+    # TODO: Increase Mom's points here and print notification
 
+    # Set the next enemy Mom will face, and reset her damage boost and active effect. Set context to 'break' to enable
+    # break actions
+    global current_character_enemy_index
+    current_character_enemy_index += 1
+    global character_enemy
+    character_enemy = dict_enemies[enemy_order[current_character_enemy_index]]
+    set_context('break')
+    character_mom.damage_boost = 1.0
+    character_mom.active_effect = Effects.NONE
+
+def start_battle():
+    new_context = 'attacking.'+character_enemy.name
+    set_context(new_context)
+    print(f'Next combatant: {character_enemy.name}!!!!')
 
 
 

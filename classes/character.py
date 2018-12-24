@@ -1,3 +1,6 @@
+from app.enums import Effects
+
+
 class Character:
 
     # TODO: Finish implementing class
@@ -8,7 +11,7 @@ class Character:
         self.health_remaining = health
         self.damage_boost = 1.0
         self.damage_boost_turns_remaining = 0
-        self.active_effect = None
+        self.active_effect = Effects.NONE
 
     def decrement_health(self, health_lost):
         print(f'{self.name} took {health_lost} points of damage')
@@ -17,3 +20,12 @@ class Character:
             # TODO: Handle case where enemy/Mom is defeated
         else:
             self.health_remaining -= health_lost
+
+
+    def increment_health(self, health_gained):
+        self.health_remaining += health_gained
+        if self.health_remaining > self.max_health:
+            self.health_remaining = self.max_health
+
+
+    def apply_active_effect(self):
