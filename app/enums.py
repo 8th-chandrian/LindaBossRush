@@ -56,7 +56,7 @@ class Attacks(Enum):
     # Gabe's Attacks
     SLEEP_TILL_3 = 30
     GABE_OUT = 31
-    STOP = 32
+    GABE_STOP = 32
     OBSCURE_REFERENCE = 33
 
     # Noah's Attacks
@@ -65,6 +65,6 @@ class Attacks(Enum):
     SAY_FAM = 36
     HERPDY_DERP = 37
 
-    # Store-Bought Cookie's Attacks
+    # Store-Bought Cookies' Attacks
     LOOK_TASTY = 38
     SIT_THERE = 39
