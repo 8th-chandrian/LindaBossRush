@@ -44,7 +44,7 @@ def prompt():
             f"\n{character_enemy.name}'s health:\t{character_enemy.health_remaining} / {character_enemy.max_health}" \
             f"\n > "
     else:
-        prompt_string = ' > '
+        prompt_string = f"\nLinda's health:\t{character_mom.health_remaining} / {character_mom.max_health}\n > "
     return prompt_string
 
 def no_command_matches(command):
@@ -327,10 +327,10 @@ def use_item(item):
 @when("view inventory")
 def view_inventory():
     if len(inventory) == 0:
-        print_delayed("Your inventory is empty", standard_delay)
-    print_delayed("Your inventory contains:", standard_delay)
+        print_delayed("Your inventory is empty", 0)
+    print_delayed("Your inventory contains:", 0)
     for item in inventory:
-        print_delayed(f'\t{item}', standard_delay)
+        print_delayed(f'\t{item}', 0)
     return
 
 
@@ -361,7 +361,7 @@ def sell_company():
 def ignore_advice():
     attack_data = dict_attacks[Attacks.IGNORE_ADVICE]
     damage = attack_data.damage * character_enemy.damage_boost
-    print_delayed('\nGreg used "ignore advice"', next_attack_delay)
+    print_delayed('\nGreg used "ignore good advice"', next_attack_delay)
     print_delayed('Greg ignored the frankly quite helful advice of his underlings,\nhurting himself in the process', standard_delay)
     print_delayed(f'{character_enemy.name} did {damage} points of damage to Linda', standard_delay)
     print_delayed(f'{character_enemy.name} did {damage} points of damage to Greg', standard_delay)
@@ -515,7 +515,7 @@ def init_attack_data():
 
 def init_character_data():
     dict_enemies[greg_name] = Character(greg_name, 100, [mild_sexism, sell_company, ignore_advice, blame_linda], dict_effects[Effects.NONE])
-    dict_enemies[pionteks_name] = Character(pionteks_name, 100, None, dict_effects[Effects.NONE])
+    dict_enemies[pionteks_name] = Character(pionteks_name, 100, [], dict_effects[Effects.NONE])
     dict_enemies[tilly_name] = Character(tilly_name, 50, None, dict_effects[Effects.NONE])
     dict_enemies[noah_name] = Character(noah_name, 100, None, dict_effects[Effects.NONE])
     dict_enemies[gabe_name] = Character(gabe_name, 100, None, dict_effects[Effects.NONE])
@@ -617,7 +617,7 @@ def end_battle(losing_character):
     character_mom.damage_boost = 1.0
     character_mom.active_effect = dict_effects[Effects.NONE]
     battle_over = True
-    print_delayed('Linda went to the hooga zone', standard_delay)
+    print_delayed('\n\nLinda went to the hooga zone', standard_delay)
 
 def print_end_game_text():
     print_delayed(instant_kill, standard_delay)
