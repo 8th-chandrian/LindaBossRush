@@ -1,9 +1,10 @@
 import sys
 from adventurelib import *
 
+from classes.attack import *
 from app.Constants import *
-from app.enums import Effects
-from classes.effect import Effect
+from app.enums import *
+from classes.effect import *
 from commands import actions
 
 greg_name = 'Greg'
@@ -41,13 +42,59 @@ def init_game_data():
     return
 
 def init_attack_data():
-    # TODO: This will instantiate attack objects for each individual attack and put them in the attacks dict, indexed by
-    # attack name
-    dict_attacks[Attacks.USE_REASON] = Attack('use reason', 15, Targets.ENEMY, Effects.NONE)
-    dict_attacks[Attacks.]
+    # Linda's Attacks
+    dict_attacks[Attacks.USE_REASON] = Attack(Attacks.USE_REASON, 15, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.COOKIES] = Attack(Attacks.COOKIES, 10, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.KICK] = Attack(Attacks.KICK, 40, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.BACH] = Attack(Attacks.BACH, 0, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.YAY] = Attack(Attacks.YAY, 0, Targets.SELF, Effects.NONE)
+    dict_attacks[Attacks.BIG_SALE] = Attack(Attacks.BIG_SALE, 20, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.GIVE_ADVICE] = Attack(Attacks.GIVE_ADVICE, 15, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.INCORRECT_REFERENCE] = (Attacks.INCORRECT_REFERENCE, 15, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.GABE_COAT] = Attack(Attacks.GABE_COAT, 20, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.LONG_TIME_MAKEUP] = Attack(Attacks.LONG_TIME_MAKEUP, 10, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.WATER_DOWN_COFFEE] = Attack(Attacks.WATER_DOWN_COFFEE, 15, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.INSIST_ON_UBER] = Attack(Attacks.INSIST_ON_UBER, 17, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.CHANGE_SUBJECT] = Attack(Attacks.CHANGE_SUBJECT, 10, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.INSIST_DINNER_LINDA] = Attack(Attacks.INSIST_DINNER_LINDA, 17, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.AIR_CANNON] = Attack(Attacks.AIR_CANNON, 5, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.CALL_GABE] = Attack(Attacks.CALL_GABE, 15, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.YELL_AT_TILLY] = Attack(Attacks.YELL_AT_TILLY, 10, Targets.ENEMY, Effects.NONE)
+
+    # Greg's Attacks
+    dict_attacks[Attacks.MILD_SEXISM] = Attack(Attacks.MILD_SEXISM, 10, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.SELL_COMPANY] = Attack(Attacks.SELL_COMPANY, 5, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.IGNORE_ADVICE] = Attack(Attacks.IGNORE_ADVICE, 10, Targets.BOTH, Effects.NONE)
+    dict_attacks[Attacks.BLAME_LINDA] = Attack(Attacks.BLAME_LINDA, 15, Targets.ENEMY, Effects.NONE)
+
+    # Piontek Siblings' Attacks
+    dict_attacks[Attacks.VOTE_TRUMP] = Attack(Attacks.VOTE_TRUMP, 8, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.INSIST_DINNER_SIBLINGS] = Attack(Attacks.INSIST_DINNER_SIBLINGS, 13, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.PICK_ON_LINDA] = Attack(Attacks.PICK_ON_LINDA, 15, Targets.ENEMY, Effects.NONE)
+
+    # Tilly's Attacks
+    dict_attacks[Attacks.SCARF_AND_BARF] = Attack(Attacks.SCARF_AND_BARF, 8, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.DEAD_MOUSE] = Attack(Attacks.DEAD_MOUSE, 10, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.ALIVE_MOUSE] = Attack(Attacks.ALIVE_MOUSE, 15, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.HAIRBALL] = Attack(Attacks.HAIRBALL, 8, Targets.ENEMY, Effects.NONE)
+
+    #Gabe's Attacks
+    dict_attacks[Attacks.SLEEP_TILL_3] = Attack(Attacks.SLEEP_TILL_3, 0, Targets.SELF, Effects.NONE)
+    dict_attacks[Attacks.GABE_OUT] = Attack(Attacks.GABE_OUT, 10, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.STOP] = Attack(Attacks.STOP, 10, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.OBSCURE_REFERENCE] = Attack(Attacks.OBSCURE_REFERENCE, 0, Targets.ENEMY, Effects.CONFUSION)
+
+    # Noah's Attacks
+    dict_attacks[Attacks.TOXIC_FART] = Attack(Attacks.TOXIC_FART, 0, Targets.ENEMY, Effects.POISON)
+    dict_attacks[Attacks.HANGER] = Attack(Attacks.HANGER, 17, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.SAY_FAM] = Attack(Attacks.SAY_FAM, 10, Targets.BOTH, Effects.NONE)
+    dict_attacks[Attacks.HERPDY_DERP] = Attack(Attacks.HERPDY_DERP, 0, Targets.ENEMY, Effects.SKIP_NEXT_TURN)
+
+    # Store-Bought Cookie's Attacks
+    dict_attacks[Attacks.LOOK_TASTY] = Attack(Attacks.LOOK_TASTY, 1, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.SIT_THERE] = Attack(Attacks.SIT_THERE, 0, Targets.ENEMY, Effects.NONE)
 
     return
-
 
 
 def init_character_data():
@@ -58,12 +105,11 @@ def init_effect_data():
     dict_effects[Effects.CONFUSION] = Effect(Effects.CONFUSION, 'Linda became confused!', 3)
     dict_effects[Effects.LOW_BLOOD_SUGAR] = Effect(Effects.LOW_BLOOD_SUGAR, 'Gabe got low blood sugar!\nGsbe\'s attack increased 50%!', -1)
     dict_effects[Effects.POISON] = Effect(Effects.POISON, 'Linda was poisoned by Noah\'s farts!', 3)
-    dict_effects[Effects.SKIP_NEXT_TURN] = Effect(Effects.SKIP_NEXT_TURN, 'Linda lost a turn!', -1)
+    dict_effects[Effects.SKIP_NEXT_TURN] = Effect(Effects.SKIP_NEXT_TURN, 'Linda\'s turn was skipped!', -1)
     dict_effects[Effects.SUPER_RELAXED] = Effect(Effects.SUPER_RELAXED, 'Linda became super relaxed!\nLinda is now invincible!', 2)
 
 
 def print_start_of_game_text():
-    # TODO: Print out start of game text (banner, introduction, instructions, etc.)
     print(title_banner)
     print(intro_text)
     print(instructions)
