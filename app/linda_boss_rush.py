@@ -1,4 +1,5 @@
 import copy
+import random
 import sys
 from adventurelib import *
 
@@ -10,6 +11,8 @@ from app.enums import Effects, Attacks, Targets
 from classes.attack import Attack
 from classes.effect import Effect
 from classes.character import Character
+from app.enums import *
+from classes.effect import *
 from commands import actions
 
 greg_name = 'Greg'
@@ -28,7 +31,9 @@ dict_attacks = {}
 enemy_order = [greg_name, pionteks_name, tilly_name, noah_name, gabe_name, cookies_name]
 current_character_enemy_index = 0
 
-global num_turns_in_battle
+num_turns_in_battle = 0
+battle_over = False
+
 
 def prompt():
     if 'attacking' in get_context():
@@ -146,11 +151,8 @@ def print_health_text():
 
 def enemy_turn():
     '''
-    This function will be called at the end of any of Mom's attack functions during a battle. It will handle all logic of
+    This function is called at the end of any of Mom's attack functions during a battle. It will handle all logic of
     the enemy's turn (random attack choice, timing between attack being printed and flavor text being printed)
-
-    Ex: if Gabe fight goes on for more than x turns, he develops low blood sugar. Custom function is called every turn which
-    checks if num_turns > low_blood_sugar_turns
     '''
     if character_enemy is dict_enemies['Gabe'] and num_turns_in_battle == 5:
         character_enemy.active_effect = copy.deepcopy(dict_effects[Effects.Effects.LOW_BLOOD_SUGAR])
@@ -160,7 +162,17 @@ def enemy_turn():
     if character_enemy is dict_enemies['Tilly'] and num_turns_in_battle == 10:
         print('Tilly ran outside. The fight is over.')
         end_battle(character_enemy)
-    # TODO: Finish implementing (need to add functionality for other effects)
+
+    outer_range = len(character_enemy.attacks)
+    next_attack_int = random.randint(0, outer_range)
+    next_attack = character_enemy.attacks[next_attack_int]
+
+
+    if character_mom.active_effect.name == Effects.SUPER_RELAXED:
+        print('Linda is super relaxed from the red wine. Linda is invincible!')
+
+
+    # TODO: Finish implementing (need to add functionality for other effects and picking random effect/doing damage)
 
 
 def end_battle(losing_character):
@@ -180,6 +192,8 @@ def end_battle(losing_character):
 
     # Set the next enemy Mom will face, and reset her damage boost and active effect. Set context to 'break' to enable
     # break actions
+    global num_turns_in_battle
+    num_turns_in_battle = 0
     global current_character_enemy_index
     current_character_enemy_index += 1
     global character_enemy
@@ -187,12 +201,18 @@ def end_battle(losing_character):
     set_context('break')
     character_mom.damage_boost = 1.0
     character_mom.active_effect = Effects.NONE
+    global battle_over
+    battle_over = True
 
 
 def start_battle():
+    global battle_over
+    battle_over = False
     new_context = 'attacking.'+character_enemy.name
     set_context(new_context)
     print(f'Next combatant: {character_enemy.name}!!!!')
+    print(f'Ready...')
+    print('Fight!')
 
 
 def main():

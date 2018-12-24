@@ -62,23 +62,36 @@ def go_to_body_pump():
 @when("use reason", context='attacking.Tilly')
 def use_reason():
     if character_mom.apply_active_effect():
-        enemy_turn()
-        return
+        if battle_over:
+            return
+        else:
+            enemy_turn()
+            return
     attack_data = dict_attacks['use reason']
     if get_context() == 'attacking.tilly':
         print('It has no effect. Tilly is a cat. Duh.')
         enemy_turn()
         return
-    character_enemy.decrement_health(attack_data.damage * character_mom.damage_boost)
-    enemy_turn()
-    return
+    else:
+        print('Linda used "use reason"')
+        damage = attack_data.damage * character_mom.damage_boost
+        print(f'Linda did {damage} points of damage to {character_enemy.name}')
+        character_enemy.decrement_health(damage)
+        if battle_over:
+            return
+        else:
+            enemy_turn()
+            return
 
 
 @when("use ITEM", context='attacking')
 def use_item(item):
     if character_mom.apply_active_effect():
-        enemy_turn()
-        return
+        if battle_over:
+            return
+        else:
+            enemy_turn()
+            return
     if item not in inventory:
         print(f'You do not have any {item}')
         return

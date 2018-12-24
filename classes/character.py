@@ -1,28 +1,34 @@
 import random
 
 from app.enums import Effects
-from app.linda_boss_rush import end_battle, dict_effects
+from app.linda_boss_rush import end_battle, dict_effects, battle_over
 
 
 class Character:
 
     # TODO: Finish implementing class
 
-    def __init__(self, name, health):
+    def __init__(self, name, health, attacks):
         self.name = name
         self.max_health = health
         self.health_remaining = health
+        self.attacks = attacks
         self.damage_boost = 1.0
         self.damage_boost_turns_remaining = 0
         self.active_effect = dict_effects[Effects.NONE]
 
     def decrement_health(self, health_lost):
+        '''
+        :param health_lost:
+        '''
         print(f'{self.name} took {health_lost} points of damage')
         if health_lost >= self.health_remaining:
             print(f'{self.name} was defeated!')
             end_battle(self)
+            return
         else:
             self.health_remaining -= health_lost
+            return False
 
 
     def increment_health(self, health_gained):
@@ -58,12 +64,16 @@ class Character:
         elif self.active_effect.name == Effects.POISON:
             print(f'{self.name} took 10 points of toxic damage from the lingering fart!')
             self.decrement_health(10)
+            if battle_over:
+                return True
             return False
         elif self.active_effect.name == Effects.CONFUSION:
             print(f'{self.name} is confused!')
             if random.randint(0,10) < 5:
                 print(f'{self.name} hurt herself in her confusion!')
                 self.decrement_health(10)
+                if battle_over:
+                    return True
                 return True
             else:
                 return False
