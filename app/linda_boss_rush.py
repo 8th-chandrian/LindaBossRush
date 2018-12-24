@@ -10,7 +10,6 @@ from classes.character import Character
 from classes.effect import *
 from app.enums import Effects, Attacks, Targets
 from classes.attack import Attack
-from classes.effect import Effect
 from app.enums import *
 from classes.effect import *
 from commands import actions
