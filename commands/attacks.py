@@ -5,7 +5,6 @@ from app.linda_boss_rush import *
 from classes.attack import Attack
 
 
-
 #########################################
 #           Mom's Attacks               #
 #########################################
@@ -14,12 +13,11 @@ from classes.attack import Attack
 @when("use reason", context='attacking.pionteks')
 @when("use reason", context='attacking.tilly')
 def use_reason():
-    attack_data = attacks_data['use reason']
+    attack_data = dict_attacks['use reason']
     if get_context() == 'attacking.tilly':
         print('It has no effect. Tilly is a cat. Duh.')
         return
-    print(attack_data.text)
-    character_enemy.decrement_health(20)
+    character_enemy.decrement_health(attack_data.damage * character_mom.damage_boost)
     # TODO: finish writing method
     enemy_turn(character_enemy.custom_function)
 
