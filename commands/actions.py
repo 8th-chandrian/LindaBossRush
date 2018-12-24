@@ -149,7 +149,9 @@ def bake_cookies():
     print('Linda used "bake chocolate chip cookies"')
     if character_enemy == dict_enemies[cookies_name]:
         print(instant_kill)
-
+        print('The store-bought cookies could not compete!')
+        print_end_game_text()
+        sys.exit()
 
 
 @when("use ITEM", context='attacking')
