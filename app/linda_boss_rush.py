@@ -6,14 +6,15 @@ from adventurelib import *
 from classes.attack import *
 from app.Constants import *
 from app.enums import *
+from classes.character import Character
 from classes.effect import *
 from app.enums import Effects, Attacks, Targets
 from classes.attack import Attack
 from classes.effect import Effect
-from classes.character import Character
 from app.enums import *
 from classes.effect import *
 from commands import actions
+from commands.actions import mild_sexism, sell_company
 
 greg_name = 'Greg'
 pionteks_name = 'The Piontek Siblings'
@@ -117,13 +118,14 @@ def init_attack_data():
 
 
 def init_character_data():
-    dict_enemies[greg_name] = Character(greg_name, 100)
+    dict_enemies[greg_name] = Character(greg_name, 100, [mild_sexism, sell_company])
     dict_enemies[pionteks_name] = Character(pionteks_name, 100)
     dict_enemies[tilly_name] = Character(tilly_name, 50)
     dict_enemies[noah_name] = Character(noah_name, 100)
     dict_enemies[gabe_name] = Character(gabe_name, 100)
     dict_enemies[cookies_name] = Character(cookies_name, -1)
-    global character_mom = Character('Linda', 100)
+    global character_mom
+    character_mom = Character('Linda', 100)
 
 def init_effect_data():
     dict_effects[Effects.NONE] = Effect(Effects.NONE, '', -1)
@@ -177,6 +179,9 @@ def end_battle(losing_character):
     '''
     This function is called when a fight ends. It handles the cases where the enemy lost, and where Mom lost
     '''
+    global num_turns_in_battle
+    global character_enemy
+    global current_character_enemy_index
     if losing_character is character_mom:
         print(game_over)
         sys.exit()
@@ -195,11 +200,8 @@ def end_battle(losing_character):
 
     # Set the next enemy Mom will face, and reset her damage boost and active effect. Set context to 'break' to enable
     # break actions
-    global num_turns_in_battle
     num_turns_in_battle = 0
-    global current_character_enemy_index
     current_character_enemy_index += 1
-    global character_enemy
     character_enemy = dict_enemies[enemy_order[current_character_enemy_index]]
     set_context('break')
     character_mom.damage_boost = 1.0
