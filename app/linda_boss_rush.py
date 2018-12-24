@@ -1,5 +1,7 @@
 from adventurelib import *
 
+from app.enums import Effects
+from classes.effect import Effect
 from commands import attacks
 
 global character_mom
@@ -36,7 +38,12 @@ def init_character_data():
 
 
 def init_effect_data():
-
+    dict_effects[Effects.NONE] = Effect(Effects.NONE, '', -1)
+    dict_effects[Effects.CONFUSION] = Effect(Effects.CONFUSION, 'Linda became confused!', 3)
+    dict_effects[Effects.LOW_BLOOD_SUGAR] = Effect(Effects.LOW_BLOOD_SUGAR, 'Gabe got low blood sugar!\nGsbe\'s attack increased 50%!', -1)
+    dict_effects[Effects.POISON] = Effect(Effects.POISON, 'Linda was poisoned by Noah\'s farts!', 3)
+    dict_effects[Effects.SKIP_NEXT_TURN] = Effect(Effects.SKIP_NEXT_TURN, 'Linda lost a turn!', -1)
+    dict_effects[Effects.SUPER_RELAXED] = Effect(Effects.SUPER_RELAXED, 'Linda became super relaxed!\nLinda is now invincible!', 2)
 
 
 def main():
