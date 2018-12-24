@@ -1,3 +1,4 @@
+import copy
 import sys
 from adventurelib import *
 
@@ -5,6 +6,10 @@ from classes.attack import *
 from app.Constants import *
 from app.enums import *
 from classes.effect import *
+from app.enums import Effects, Attacks, Targets
+from classes.attack import Attack
+from classes.effect import Effect
+from classes.character import Character
 from commands import actions
 
 greg_name = 'Greg'
@@ -15,7 +20,6 @@ gabe_name = 'Gabe'
 cookies_name = 'Store-Bought Chocolate Chip Cookies'
 
 character_mom = None
-mom_attacks = {}
 inventory = []
 character_enemy = None
 dict_enemies = {}
@@ -25,6 +29,15 @@ enemy_order = [greg_name, pionteks_name, tilly_name, noah_name, gabe_name, cooki
 current_character_enemy_index = 0
 
 global num_turns_in_battle
+
+def prompt():
+    if 'attacking' in get_context():
+        prompt_string = f"\nLinda's health:\t{character_mom.health_remaining} / {character_mom.max_health}" \
+            f"\n{character_enemy.name}'s health:\t{character_enemy.health_remaining} / {character_enemy.max_health}" \
+            f"\n > "
+    else:
+        prompt_string = '\nLinda went to the hooga zone\n > '
+    return prompt_string
 
 
 def init_game_data():
@@ -98,6 +111,12 @@ def init_attack_data():
 
 
 def init_character_data():
+    dict_enemies[greg_name] = Character(greg_name, 100)
+    dict_enemies[pionteks_name] = Character(pionteks_name, 100)
+    dict_enemies[tilly_name] = Character(tilly_name, 50)
+    dict_enemies[noah_name] = Character(noah_name, 100)
+    dict_enemies[gabe_name] = Character(gabe_name, 100)
+    dict_enemies[cookies_name] = Character(cookies_name, -1)
 
 
 def init_effect_data():
@@ -115,15 +134,14 @@ def print_start_of_game_text():
     print(instructions)
 
 def print_new_enemy_text():
-    
 
-def main():
-    init_game_data()
-    set_context('attacking.greg')
-    global character_enemy
-    character_enemy = dict_enemies['Greg']
-    print_start_of_game_text()
-    start()
+
+def print_health_text():
+    '''
+    This should be called before each of Mom's turns
+    '''
+    print(f'Linda\'s health:\t{character_mom.health_remaining} / {character_mom.base_health}')
+    print(f'{character_enemy.name}\'s health:\t{character_mom.health_remaining} / {character_mom.base_health}')
 
 
 def enemy_turn():
@@ -134,15 +152,15 @@ def enemy_turn():
     Ex: if Gabe fight goes on for more than x turns, he develops low blood sugar. Custom function is called every turn which
     checks if num_turns > low_blood_sugar_turns
     '''
-    if character_enemy.active_effect.name is Effects.SKIP_NEXT_TURN:
-        print(f'{character_enemy.name}\'s turn was skipped!')
-        character_enemy.active_effect = Effects.NONE
-        return
     if character_enemy is dict_enemies['Gabe'] and num_turns_in_battle == 5:
+        character_enemy.active_effect = copy.deepcopy(dict_effects[Effects.Effects.LOW_BLOOD_SUGAR])
         character_enemy.damage_boost = 1.5
+        character_enemy.damage_boost_turns_remaining = 1000
+        print(character_enemy.active_effect.text)
     if character_enemy is dict_enemies['Tilly'] and num_turns_in_battle == 10:
         print('Tilly ran outside. The fight is over.')
         end_battle(character_enemy)
+    # TODO: Finish implementing (need to add functionality for other effects)
 
 
 def end_battle(losing_character):
@@ -150,14 +168,15 @@ def end_battle(losing_character):
     This function is called when a fight ends. It handles the cases where the enemy lost, and where Mom lost
     '''
     if losing_character is character_mom:
-        print("You were defeated! Oh no...")
-        # TODO: switch 'Game Over' to ASCII art text
         print(game_over)
         sys.exit()
 
     # First, print out character defeat info
-    print(f'{losing_character.name} was defeated!')
-    # TODO: Increase Mom's points here and print notification
+    if losing_character is dict_enemies['Tilly'] and num_turns_in_battle == 10:
+        print('Because Tilly ran outside, Linda did not gain any points')
+    else:
+        print(f'{losing_character.name} was defeated!')
+        # TODO: Increment Mom's points here and print notification of current points held
 
     # Set the next enemy Mom will face, and reset her damage boost and active effect. Set context to 'break' to enable
     # break actions
@@ -169,12 +188,20 @@ def end_battle(losing_character):
     character_mom.damage_boost = 1.0
     character_mom.active_effect = Effects.NONE
 
+
 def start_battle():
     new_context = 'attacking.'+character_enemy.name
     set_context(new_context)
     print(f'Next combatant: {character_enemy.name}!!!!')
 
 
+def main():
+    init_game_data()
+    set_context('attacking.greg')
+    global character_enemy
+    character_enemy = dict_enemies['Greg']
+    print_start_of_game_text()
+    start()
 
 
 if __name__ == '__main__':
