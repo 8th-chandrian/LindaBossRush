@@ -67,7 +67,10 @@ def use_reason():
         else:
             enemy_turn()
             return
-    attack_data = dict_attacks['use reason']
+    if battle_over:
+        return
+
+    attack_data = dict_attacks[Attacks.USE_REASON]
     if get_context() == 'attacking.tilly':
         print('It has no effect. Tilly is a cat. Duh.')
         enemy_turn()
@@ -83,6 +86,71 @@ def use_reason():
             enemy_turn()
             return
 
+@when("roundhouse kick", context='attacking.Greg')
+def roundhouse_kick():
+    if character_mom.apply_active_effect():
+        if battle_over:
+            return
+        else:
+            enemy_turn()
+            return
+    if battle_over:
+        return
+
+    attack_data = dict_attacks[Attacks.KICK]
+    print('Linda used "roundhouse kick"')
+    damage = attack_data.damage * character_mom.damage_boost
+    print(smash)
+    print(f'Linda did {damage} points of damage to {character_enemy.name}')
+    character_enemy.decrement_health(damage)
+    if battle_over:
+        return
+    else:
+        enemy_turn()
+        return
+
+
+@when("close a big sale", context='attacking.Greg')
+def close_sale():
+    if character_mom.apply_active_effect():
+        if battle_over:
+            return
+        else:
+            enemy_turn()
+            return
+    if battle_over:
+        return
+
+    attack_data = dict_attacks[Attacks.BIG_SALE]
+    print('Linda used "close a big sale"')
+    damage = attack_data.damage * character_mom.damage_boost
+    print('Yay! (fingers apart)')
+    print(f'Linda did {damage} points of damage to {character_enemy.name}')
+    character_enemy.decrement_health(damage)
+    if battle_over:
+        return
+    else:
+        enemy_turn()
+        return
+
+@when("bake chocolate chip cookies", context='attacking.Gabe')
+@when("bake chocolate chip cookies", context='attacking.Store-Bought Chocolate Chip Cookies')
+def bake_cookies():
+    if character_mom.apply_active_effect():
+        if battle_over:
+            return
+        else:
+            enemy_turn()
+            return
+    if battle_over:
+        return
+
+    attack_data = dict_attacks[Attacks.COOKIES]
+    print('Linda used "bake chocolate chip cookies"')
+    if character_enemy == dict_enemies[cookies_name]:
+        print(instant_kill)
+
+
 
 @when("use ITEM", context='attacking')
 def use_item(item):
@@ -92,6 +160,9 @@ def use_item(item):
         else:
             enemy_turn()
             return
+    if battle_over:
+        return
+
     if item not in inventory:
         print(f'You do not have any {item}')
         return
