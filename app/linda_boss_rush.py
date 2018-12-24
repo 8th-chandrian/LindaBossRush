@@ -141,12 +141,8 @@ def print_start_of_game_text():
 def print_new_enemy_text():
 
 
-def print_health_text():
-    '''
-    This should be called before each of Mom's turns
-    '''
-    print(f'Linda\'s health:\t{character_mom.health_remaining} / {character_mom.base_health}')
-    print(f'{character_enemy.name}\'s health:\t{character_mom.health_remaining} / {character_mom.base_health}')
+def print_end_game_text():
+
 
 
 def enemy_turn():
@@ -211,7 +207,7 @@ def start_battle():
     new_context = 'attacking.'+character_enemy.name
     set_context(new_context)
     print(f'Next combatant: {character_enemy.name}!!!!')
-    print(f'Ready...')
+    print('Ready...')
     print('Fight!')
 
 
