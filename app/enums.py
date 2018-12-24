@@ -23,7 +23,6 @@ class Attacks(Enum):
     KICK = 3
     BACH = 4
     YAY = 5
-    HOOGA = 6
     BIG_SALE = 7
     GIVE_ADVICE = 8
     INCORRECT_REFERENCE = 9
@@ -54,7 +53,18 @@ class Attacks(Enum):
     ALIVE_MOUSE = 28
     HAIRBALL = 29
 
-    #Gabe's Attacks
+    # Gabe's Attacks
     SLEEP_TILL_3 = 30
     GABE_OUT = 31
     STOP = 32
+    OBSCURE_REFERENCE = 33
+
+    # Noah's Attacks
+    TOXIC_FART = 34
+    HANGER = 35
+    SAY_FAM = 36
+    HERPDY_DERP = 37
+
+    # Store-Bought Cookie's Attacks
+    LOOK_TASTY = 38
+    SIT_THERE = 39
