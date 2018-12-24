@@ -584,7 +584,7 @@ def start_battle():
     print_delayed('Fight!', next_attack_delay)
 
 
-def end_battle(losing_character):
+def end_battle(losing_character): # TODO: make mom's health go back to 100 at the start of each new fight? Maybe? Let's talk about it
     '''
     This function is called when a fight ends. It handles the cases where the enemy lost, and where Mom lost
     '''

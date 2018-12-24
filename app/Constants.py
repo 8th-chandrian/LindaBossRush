@@ -244,7 +244,7 @@ list_of_rewards = '''
 
 Here are the things you can buy with all the sweet sweet cash-money you've acquired:
 
-1pt - Hugs
+1pt - Hug
 5pt - Grocery run + putting groceries away
 10pt - Coffee + NYT in bed
 10pt - Omakase Pittsford Farms Dairy Scooper’s Special 
