@@ -24,7 +24,8 @@ inventory = []
 dict_enemies = {}
 dict_effects = {}
 dict_attacks = {}
-enemy_order = [greg_name, pionteks_name, tilly_name, noah_name, gabe_name, cookies_name]
+# TODO: Fix order!!
+enemy_order = [greg_name, gabe_name, cookies_name, pionteks_name, tilly_name, noah_name]
 current_character_enemy_index = 0
 score = 0
 
@@ -617,9 +618,10 @@ def use_item(item):
 def view_inventory():
     if len(inventory) == 0:
         print_delayed("Your inventory is empty", 0)
-    print_delayed("Your inventory contains:", 0)
-    for item in inventory:
-        print_delayed(f'\t{item}', 0)
+    else:
+        print_delayed("Your inventory contains:", 0)
+        for item in inventory:
+            print_delayed(f'\t{item}', 0)
     return
 
 
@@ -786,7 +788,7 @@ def herpdy_derp():
     attack_data = dict_attacks[Attacks.HERPDY_DERP]
     print_delayed('\nNoah said "herpdy derp"!', next_attack_delay)
     print_delayed('Linda cracked up!', standard_delay)
-    print_delayed('Linda\'s turn was skipped!', standard_delay)
+    print_delayed('Linda\'s next turn was skipped!', standard_delay)
     character_mom.active_effect = copy.deepcopy(dict_effects[Effects.SKIP_NEXT_TURN])
 
 ##### Store-Bought Cookies' Attacks #####
@@ -826,7 +828,7 @@ def init_attack_data():
     dict_attacks[Attacks.YAY] = Attack(Attacks.YAY, 20, Targets.SELF, Effects.NONE)
     dict_attacks[Attacks.BIG_SALE] = Attack(Attacks.BIG_SALE, 20, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.GIVE_ADVICE] = Attack(Attacks.GIVE_ADVICE, 15, Targets.ENEMY, Effects.NONE)
-    dict_attacks[Attacks.INCORRECT_REFERENCE] = (Attacks.INCORRECT_REFERENCE, 15, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.INCORRECT_REFERENCE] = Attack(Attacks.INCORRECT_REFERENCE, 15, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.GABE_COAT] = Attack(Attacks.GABE_COAT, 20, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.LONG_TIME_MAKEUP] = Attack(Attacks.LONG_TIME_MAKEUP, 10, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.WATER_DOWN_COFFEE] = Attack(Attacks.WATER_DOWN_COFFEE, 15, Targets.ENEMY, Effects.NONE)
