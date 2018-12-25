@@ -413,7 +413,7 @@ def incorrect_reference():
     attack_data = dict_attacks[Attacks.INCORRECT_REFERENCE]
     damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_mom.damage_boost)
     print_delayed('Linda attempted to reference that guy Zelda.', standard_delay)
-    print_delayed('Gabe looked unimpressed.')
+    print_delayed('Gabe looked unimpressed.', standard_delay)
     print_delayed('You know, the guy with the sword and the green hat?', standard_delay)
     print_delayed('Gabe wasn\'t having any of that nonsense.', standard_delay)
     print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}', standard_delay)
@@ -914,7 +914,7 @@ def enemy_turn():
     '''
     global num_turns_in_battle
     if character_enemy is dict_enemies['Gabe'] and num_turns_in_battle == 5:
-        character_enemy.active_effect = copy.deepcopy(dict_effects[Effects.Effects.LOW_BLOOD_SUGAR])
+        character_enemy.active_effect = copy.deepcopy(dict_effects[Effects.LOW_BLOOD_SUGAR])
         character_enemy.damage_boost = 1.5
         character_enemy.damage_boost_turns_remaining = 1000
         print_delayed(character_enemy.active_effect.text, standard_delay)
