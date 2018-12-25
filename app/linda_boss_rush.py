@@ -956,9 +956,9 @@ def start_battle():
 
 def increment_score(num_turns_in_battle):
     if num_turns_in_battle <= 7:
-        return 20
+        return 17
     elif num_turns_in_battle <= 14:
-        return 10
+        return 12
     else:
         return 5
 
