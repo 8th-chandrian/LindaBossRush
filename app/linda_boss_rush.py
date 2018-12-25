@@ -1000,8 +1000,7 @@ def end_battle(losing_character):
     print_delayed('\n\nLinda went to the hooga zone', standard_delay)
 
 def print_end_game_text():
-    print_delayed(instant_kill, standard_delay)
-    print_delayed(congrats, standard_delay)
+    print_delayed(congrats, 3)
     print_delayed(f'You have defeated all bosses! Your total score is {score}!', standard_delay)
     print_delayed(list_of_rewards, standard_delay)
 
