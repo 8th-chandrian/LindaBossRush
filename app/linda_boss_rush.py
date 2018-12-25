@@ -394,7 +394,7 @@ def bake_cookies():
             character_enemy.active_effect = dict_effects[Effects.NONE]
             character_enemy.damage_boost = 1.0
         else:
-            print_delayed('Gabe was prevented from getting low blood sugar for 5 more turns.', standard_delay)
+            print_delayed('Gabe was prevented from getting low blood sugar for a while.', standard_delay)
             global num_turns_in_battle
             num_turns_in_battle = 1
     enemy_turn()
