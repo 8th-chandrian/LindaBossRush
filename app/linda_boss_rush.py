@@ -108,9 +108,9 @@ def apply_active_effect(character):
         return False
     elif character.active_effect.name == Effects.CONFUSION:
         print_delayed(f'{character.name} is confused!', standard_delay)
-        if random.randint(0,10) < 5:
+        if random.randint(0,2) == 1:
             print_delayed(f'{character.name} hurt herself in her confusion!', standard_delay)
-            damage = math.ceil((random.randint(-1, 4) + 15))
+            damage = math.ceil((random.randint(-1, 4) + 10))
             print_delayed(f'{character.name} took {damage} points of damage', standard_delay)
             decrement_health(character, damage)
             if battle_over:
@@ -604,8 +604,8 @@ def use_item(item):
         inventory.remove(item)
         print_delayed(f'Linda used {item}', standard_delay)
         if item.lower() == 'dark chocolate':
-            print_delayed('Linda was healed for 30 points!', standard_delay)
-            increment_health(character_mom, 30)
+            print_delayed('Linda was healed for 50 points!', standard_delay)
+            increment_health(character_mom, 50)
         elif item.lower() == 'coffee':
             print_delayed('Linda got wired! Linda\'s attack damage increased!', standard_delay)
             character_mom.damage_boost += 0.5
@@ -825,7 +825,7 @@ def init_attack_data():
     dict_attacks[Attacks.USE_REASON] = Attack(Attacks.USE_REASON, 15, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.COOKIES] = Attack(Attacks.COOKIES, 0, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.KICK] = Attack(Attacks.KICK, 40, Targets.ENEMY, Effects.NONE)
-    dict_attacks[Attacks.BACH] = Attack(Attacks.BACH, 7, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.BACH] = Attack(Attacks.BACH, 10, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.YAY] = Attack(Attacks.YAY, 20, Targets.SELF, Effects.NONE)
     dict_attacks[Attacks.BIG_SALE] = Attack(Attacks.BIG_SALE, 20, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.GIVE_ADVICE] = Attack(Attacks.GIVE_ADVICE, 15, Targets.ENEMY, Effects.NONE)
@@ -885,7 +885,7 @@ def init_character_data():
 
 def init_effect_data():
     dict_effects[Effects.NONE] = Effect(Effects.NONE, '', -1)
-    dict_effects[Effects.CONFUSION] = Effect(Effects.CONFUSION, 'Linda became confused!', 3)
+    dict_effects[Effects.CONFUSION] = Effect(Effects.CONFUSION, 'Linda became confused!', 2)
     dict_effects[Effects.LOW_BLOOD_SUGAR] = Effect(Effects.LOW_BLOOD_SUGAR, '\nGabe got low blood sugar!\nGsbe\'s attack increased 50%!', -1)
     dict_effects[Effects.POISON] = Effect(Effects.POISON, 'Linda was poisoned by Noah\'s farts!', 3)
     dict_effects[Effects.SKIP_NEXT_TURN] = Effect(Effects.SKIP_NEXT_TURN, 'Linda\'s turn was skipped!', -1)
