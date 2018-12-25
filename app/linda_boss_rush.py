@@ -358,7 +358,6 @@ def play_bach():
 
     attack_data = dict_attacks[Attacks.BACH]
     healing = attack_data.damage
-    print_delayed('Linda used "play bach"', standard_delay)
     print_delayed(f'Linda played Bach and prevented Gabe from sleeping!', standard_delay)
     print_delayed(f'Linda felt relaxed and healed for {healing} points of damage!', standard_delay)
     increment_health(character_mom, healing)
