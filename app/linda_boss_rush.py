@@ -505,8 +505,8 @@ def insist_on_uber():
 
     attack_data = dict_attacks[Attacks.INSIST_ON_UBER]
     damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_mom.damage_boost)
-    print_delayed('Linda watered down the coffee.', standard_delay)
-    print_delayed('Noah drank some and was grossed out.', standard_delay)
+    print_delayed('It\'s raining outside! Linda insisted on taking an uber.', standard_delay)
+    print_delayed('Noah let out an exasperated groan.', standard_delay)
     print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
     decrement_health(character_enemy, damage)
     if battle_over:
