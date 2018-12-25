@@ -141,7 +141,7 @@ Your first opponent...
 
 '''
 greg_intro_text_2 = '''
-GREG'''
+GREGG'''
 greg_intro_text_3 = '''
 "THE LEADER MAN"'''
 greg_intro_text_4 = '''
