@@ -187,7 +187,7 @@ def use_reason():
     else:
         print_delayed('Linda attempted to use reason.', standard_delay)
         print_delayed('Linda was rational and mature.', standard_delay)
-        damage = attack_data.damage * character_mom.damage_boost
+        damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_mom.damage_boost)
         print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
         decrement_health(character_enemy, damage)
         if battle_over:
@@ -210,7 +210,7 @@ def roundhouse_kick():
 
     attack_data = dict_attacks[Attacks.KICK]
     print_delayed('Linda roundhouse kicked Greg in the face!', standard_delay)
-    damage = attack_data.damage * character_mom.damage_boost
+    damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_mom.damage_boost)
     print_delayed(smash, standard_delay)
     print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', 3)
     print_delayed('Oooh! Now that\'s a lotta damage!!!', standard_delay)
@@ -235,7 +235,7 @@ def close_sale():
 
     attack_data = dict_attacks[Attacks.BIG_SALE]
     print_delayed('Linda closed a big sale!', standard_delay)
-    damage = attack_data.damage * character_mom.damage_boost
+    damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_mom.damage_boost)
     print_delayed('Yay! (fingers apart)', standard_delay)
     print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
     decrement_health(character_enemy, damage)
@@ -258,7 +258,7 @@ def give_good_advice():
         return
 
     attack_data = dict_attacks[Attacks.GIVE_ADVICE]
-    damage = attack_data.damage * character_mom.damage_boost
+    damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_mom.damage_boost)
     print_delayed('Linda gave Greg some good advice!', standard_delay)
     print_delayed('He said thanks and immediately ignored it, to his own detriment...', standard_delay)
     print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
@@ -282,7 +282,7 @@ def insist_dinner_linda():
         return
 
     attack_data = dict_attacks[Attacks.INSIST_DINNER_LINDA]
-    damage = attack_data.damage * character_mom.damage_boost
+    damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_mom.damage_boost)
     print_delayed('Linda insisted on paying for dinner.', standard_delay)
     print_delayed('The Piontek Siblings felt bad for not paying.', standard_delay)
     print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
@@ -306,7 +306,7 @@ def change_subject():
         return
 
     attack_data = dict_attacks[Attacks.CHANGE_SUBJECT]
-    damage = attack_data.damage * character_mom.damage_boost
+    damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_mom.damage_boost)
     print_delayed('Linda felt uncomfortable.', standard_delay)
     print_delayed('Linda changed the subject to talk about something besides politics.', standard_delay)
     print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
@@ -408,7 +408,7 @@ def incorrect_reference():
     if battle_over:
         return
     attack_data = dict_attacks[Attacks.INCORRECT_REFERENCE]
-    damage = attack_data.damage * character_mom.damage_boost
+    damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_mom.damage_boost)
     print_delayed('Linda attempted to reference that guy Zelda.', standard_delay)
     print_delayed('Gabe looked unimpressed.')
     print_delayed('You know, the guy with the sword and the green hat?', standard_delay)
@@ -433,7 +433,7 @@ def gabe_coat():
         return
 
     attack_data = dict_attacks[Attacks.GABE_COAT]
-    damage = attack_data.damage * character_mom.damage_boost
+    damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_mom.damage_boost)
     print_delayed('Linda made Gabe wear a coat. It\'s cold outside!', standard_delay)
     print_delayed('Gabe scowled.', standard_delay)
     print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
@@ -456,7 +456,7 @@ def long_time_makeup():
         return
 
     attack_data = dict_attacks[Attacks.LONG_TIME_MAKEUP]
-    damage = attack_data.damage * character_mom.damage_boost
+    damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_mom.damage_boost)
     print_delayed('Linda took way too long putting on makeup.', standard_delay)
     print_delayed('Noah got annoyed.', standard_delay)
     print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
@@ -479,7 +479,7 @@ def water_down_coffee():
         return
 
     attack_data = dict_attacks[Attacks.WATER_DOWN_COFFEE]
-    damage = attack_data.damage * character_mom.damage_boost
+    damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_mom.damage_boost)
     print_delayed('Linda watered down the coffee.', standard_delay)
     print_delayed('Noah drank some and was grossed out.', standard_delay)
     print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
@@ -502,7 +502,7 @@ def insist_on_uber():
         return
 
     attack_data = dict_attacks[Attacks.INSIST_ON_UBER]
-    damage = attack_data.damage * character_mom.damage_boost
+    damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_mom.damage_boost)
     print_delayed('Linda watered down the coffee.', standard_delay)
     print_delayed('Noah drank some and was grossed out.', standard_delay)
     print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
@@ -525,7 +525,7 @@ def air_cannon():
         return
 
     attack_data = dict_attacks[Attacks.AIR_CANNON]
-    damage = attack_data.damage * character_mom.damage_boost
+    damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_mom.damage_boost)
     print_delayed('Linda hit Tilly with a blast from the air cannon.', standard_delay)
     print_delayed('Tilly meowed angrily and ran out of the room.', standard_delay)
     print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
@@ -548,7 +548,7 @@ def call_gabe():
         return
 
     attack_data = dict_attacks[Attacks.CALL_GABE]
-    damage = attack_data.damage * character_mom.damage_boost
+    damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_mom.damage_boost)
     print_delayed('Linda called Gabe.', standard_delay)
     print_delayed('Gabe terrorized Tilly!', standard_delay)
     print_delayed(f'Gabe did {damage} points of damage to {character_enemy.name}.', standard_delay)
@@ -571,7 +571,7 @@ def yell_at_tilly():
         return
 
     attack_data = dict_attacks[Attacks.YELL_AT_TILLY]
-    damage = attack_data.damage * character_mom.damage_boost
+    damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_mom.damage_boost)
     print_delayed('Linda yelled at Tilly.', standard_delay)
     print_delayed('Tilly paused for a second, then carried on.', standard_delay)
     print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
