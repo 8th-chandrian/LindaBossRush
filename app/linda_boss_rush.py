@@ -361,7 +361,7 @@ def play_bach():
     print_delayed('Linda used "play bach"', standard_delay)
     print_delayed(f'Linda played Bach and prevented Gabe from sleeping!', standard_delay)
     print_delayed(f'Linda felt relaxed and healed for {healing} points of damage!', standard_delay)
-    increment_health(character_enemy, healing)
+    increment_health(character_mom, healing)
     dict_attacks[Attacks.SLEEP_TILL_3].is_disabled = True
     if battle_over:
         return
@@ -859,8 +859,8 @@ def init_attack_data():
 
     #Gabe's Attacks
     dict_attacks[Attacks.SLEEP_TILL_3] = Attack(Attacks.SLEEP_TILL_3, 15, Targets.SELF, Effects.NONE)
-    dict_attacks[Attacks.GABE_OUT] = Attack(Attacks.GABE_OUT, 10, Targets.ENEMY, Effects.NONE)
-    dict_attacks[Attacks.GABE_STOP] = Attack(Attacks.GABE_STOP, 10, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.GABE_OUT] = Attack(Attacks.GABE_OUT, 12, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.GABE_STOP] = Attack(Attacks.GABE_STOP, 18, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.OBSCURE_REFERENCE] = Attack(Attacks.OBSCURE_REFERENCE, 0, Targets.ENEMY, Effects.CONFUSION)
 
     # Noah's Attacks
@@ -886,7 +886,7 @@ def init_character_data():
 def init_effect_data():
     dict_effects[Effects.NONE] = Effect(Effects.NONE, '', -1)
     dict_effects[Effects.CONFUSION] = Effect(Effects.CONFUSION, 'Linda became confused!', 3)
-    dict_effects[Effects.LOW_BLOOD_SUGAR] = Effect(Effects.LOW_BLOOD_SUGAR, 'Gabe got low blood sugar!\nGsbe\'s attack increased 50%!', -1)
+    dict_effects[Effects.LOW_BLOOD_SUGAR] = Effect(Effects.LOW_BLOOD_SUGAR, '\nGabe got low blood sugar!\nGsbe\'s attack increased 50%!', -1)
     dict_effects[Effects.POISON] = Effect(Effects.POISON, 'Linda was poisoned by Noah\'s farts!', 3)
     dict_effects[Effects.SKIP_NEXT_TURN] = Effect(Effects.SKIP_NEXT_TURN, 'Linda\'s turn was skipped!', -1)
     dict_effects[Effects.SUPER_RELAXED] = Effect(Effects.SUPER_RELAXED, 'Linda became super relaxed!\nLinda is now invincible!', 2)

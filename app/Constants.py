@@ -138,7 +138,6 @@ and not just in service of some puns and a good time on Christmas.
 
 greg_intro_text_1 = '''
 Your first opponent...
-
 '''
 greg_intro_text_2 = '''
 GREGG'''
