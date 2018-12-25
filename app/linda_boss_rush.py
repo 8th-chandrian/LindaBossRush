@@ -307,9 +307,9 @@ def change_subject():
 
     attack_data = dict_attacks[Attacks.CHANGE_SUBJECT]
     damage = attack_data.damage * character_mom.damage_boost
-    print_delayed('Linda used "change the subject"', standard_delay)
+    print_delayed('Linda felt uncomfortable.', standard_delay)
     print_delayed('Linda changed the subject to talk about something besides politics.', standard_delay)
-    print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}', standard_delay)
+    print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
     decrement_health(character_enemy, damage)
     if battle_over:
         return
@@ -331,7 +331,7 @@ def yay():
 
     attack_data = dict_attacks[Attacks.YAY]
     healing = attack_data.damage
-    print_delayed('Linda used "yay!"', standard_delay)
+    print_delayed('Linda said "yay!" (fingers apart)', standard_delay)
     print_delayed(f'Linda was happy! Linda healed {healing} points of damage!', standard_delay)
     increment_health(character_mom, healing)
     if battle_over:
@@ -355,8 +355,8 @@ def play_bach():
     attack_data = dict_attacks[Attacks.BACH]
     healing = attack_data.damage
     print_delayed('Linda used "play bach"', standard_delay)
-    print_delayed(f'Linda played Bach and prevented Gabe from sleeping until 3pm!', standard_delay)
-    print_delayed(f'Linda felt relaxed and healed for {healing} points of damage', standard_delay)
+    print_delayed(f'Linda played Bach and prevented Gabe from sleeping!', standard_delay)
+    print_delayed(f'Linda felt relaxed and healed for {healing} points of damage!', standard_delay)
     increment_health(character_enemy, healing)
     dict_attacks[Attacks.SLEEP_TILL_3].is_disabled = True
     if battle_over:
@@ -380,7 +380,7 @@ def bake_cookies():
     if battle_over:
         return
 
-    print_delayed('Linda used "bake chocolate chip cookies"', standard_delay)
+    print_delayed('Linda baked some chocolate chip cookies.', standard_delay)
     if character_enemy == dict_enemies[cookies_name]:
         print_delayed(instant_kill, standard_delay)
         print_delayed('The store-bought cookies could not compete!', standard_delay)
@@ -397,8 +397,190 @@ def bake_cookies():
     enemy_turn()
     return
 
+@when("attempt a reference", context='attacking.Gabe')
+def incorrect_reference():
+    if apply_active_effect(character_mom):
+        if battle_over:
+            return
+        else:
+            enemy_turn()
+            return
+    if battle_over:
+        return
+    attack_data = dict_attacks[Attacks.INCORRECT_REFERENCE]
+    damage = attack_data.damage * character_mom.damage_boost
+    print_delayed('Linda attempted to reference that guy Zelda.', standard_delay)
+    print_delayed('Gabe looked unimpressed.')
+    print_delayed('You know, the guy with the sword and the green hat?', standard_delay)
+    print_delayed('Gabe wasn\'t having any of that nonsense.', standard_delay)
+    print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}', standard_delay)
+    decrement_health(character_enemy, damage)
+    if battle_over:
+        return
+    else:
+        enemy_turn()
+        return
 
+@when("make gabe wear a coat", context='attacking.Gabe')
+def gabe_coat():
+    if apply_active_effect(character_mom):
+        if battle_over:
+            return
+        else:
+            enemy_turn()
+            return
+    if battle_over:
+        return
 
+    attack_data = dict_attacks[Attacks.GABE_COAT]
+    damage = attack_data.damage * character_mom.damage_boost
+    print_delayed('Linda made Gabe wear a coat. It\'s cold outside!', standard_delay)
+    print_delayed('Gabe scowled.', standard_delay)
+    print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
+    decrement_health(character_enemy, damage)
+    if battle_over:
+        return
+    else:
+        enemy_turn()
+        return
+
+@when("put on makeup", context='attacking.Noah')
+def long_time_makeup():
+    if apply_active_effect(character_mom):
+        if battle_over:
+            return
+        else:
+            enemy_turn()
+            return
+    if battle_over:
+        return
+
+    attack_data = dict_attacks[Attacks.LONG_TIME_MAKEUP]
+    damage = attack_data.damage * character_mom.damage_boost
+    print_delayed('Linda took way too long putting on makeup.', standard_delay)
+    print_delayed('Noah got annoyed.', standard_delay)
+    print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
+    decrement_health(character_enemy, damage)
+    if battle_over:
+        return
+    else:
+        enemy_turn()
+        return
+
+@when("water down the coffee", context='attacking.Noah')
+def water_down_coffee():
+    if apply_active_effect(character_mom):
+        if battle_over:
+            return
+        else:
+            enemy_turn()
+            return
+    if battle_over:
+        return
+
+    attack_data = dict_attacks[Attacks.WATER_DOWN_COFFEE]
+    damage = attack_data.damage * character_mom.damage_boost
+    print_delayed('Linda watered down the coffee.', standard_delay)
+    print_delayed('Noah drank some and was grossed out.', standard_delay)
+    print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
+    decrement_health(character_enemy, damage)
+    if battle_over:
+        return
+    else:
+        enemy_turn()
+        return
+
+@when("insist on taking an uber", context='attacking.Noah')
+def insist_on_uber():
+    if apply_active_effect(character_mom):
+        if battle_over:
+            return
+        else:
+            enemy_turn()
+            return
+    if battle_over:
+        return
+
+    attack_data = dict_attacks[Attacks.INSIST_ON_UBER]
+    damage = attack_data.damage * character_mom.damage_boost
+    print_delayed('Linda watered down the coffee.', standard_delay)
+    print_delayed('Noah drank some and was grossed out.', standard_delay)
+    print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
+    decrement_health(character_enemy, damage)
+    if battle_over:
+        return
+    else:
+        enemy_turn()
+        return
+
+@when("use the air cannon", context='attacking.Tilly')
+def air_cannon():
+    if apply_active_effect(character_mom):
+        if battle_over:
+            return
+        else:
+            enemy_turn()
+            return
+    if battle_over:
+        return
+
+    attack_data = dict_attacks[Attacks.AIR_CANNON]
+    damage = attack_data.damage * character_mom.damage_boost
+    print_delayed('Linda hit Tilly with a blast from the air cannon.', standard_delay)
+    print_delayed('Tilly meowed angrily and ran out of the room.', standard_delay)
+    print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
+    decrement_health(character_enemy, damage)
+    if battle_over:
+        return
+    else:
+        enemy_turn()
+        return
+
+@when("call gabe", context='attacking.Tilly')
+def call_gabe():
+    if apply_active_effect(character_mom):
+        if battle_over:
+            return
+        else:
+            enemy_turn()
+            return
+    if battle_over:
+        return
+
+    attack_data = dict_attacks[Attacks.CALL_GABE]
+    damage = attack_data.damage * character_mom.damage_boost
+    print_delayed('Linda called Gabe.', standard_delay)
+    print_delayed('Gabe terrorized Tilly!', standard_delay)
+    print_delayed(f'Gabe did {damage} points of damage to {character_enemy.name}.', standard_delay)
+    decrement_health(character_enemy, damage)
+    if battle_over:
+        return
+    else:
+        enemy_turn()
+        return
+
+@when("yell at tilly", context='attacking.Tilly')
+def yell_at_tilly():
+    if apply_active_effect(character_mom):
+        if battle_over:
+            return
+        else:
+            enemy_turn()
+            return
+    if battle_over:
+        return
+
+    attack_data = dict_attacks[Attacks.YELL_AT_TILLY]
+    damage = attack_data.damage * character_mom.damage_boost
+    print_delayed('Linda yelled at Tilly.', standard_delay)
+    print_delayed('Tilly paused for a second, then carried on.', standard_delay)
+    print_delayed(f'Linda did {damage} points of damage to {character_enemy.name}.', standard_delay)
+    decrement_health(character_enemy, damage)
+    if battle_over:
+        return
+    else:
+        enemy_turn()
+        return
 
 @when("use ITEM", context='attacking')
 def use_item(item):
@@ -443,10 +625,7 @@ def view_inventory():
 #########################################
 #           Enemy Attacks               #
 #########################################
-# TODO: change "character used attack" to "character attacked", also add punctuation
 ##### Greg's Attacks #####
-
-
 def mild_sexism():
     attack_data = dict_attacks[Attacks.MILD_SEXISM]
     damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_enemy.damage_boost)
@@ -474,7 +653,7 @@ def ignore_advice():
     decrement_health(character_enemy, damage)
 
 def blame_linda():
-    attack_data = dict_attacks[Attacks.IGNORE_ADVICE]
+    attack_data = dict_attacks[Attacks.BLAME_LINDA]
     damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_enemy.damage_boost)
     print_delayed('\nGreg blamed Linda for something he did!', next_attack_delay)
     print_delayed(f'{character_enemy.name} did {damage} points of damage to Linda.', standard_delay)
@@ -528,9 +707,9 @@ def alive_mouse():
     attack_data = dict_attacks[Attacks.ALIVE_MOUSE]
     damage = math.ceil((random.randint(-1, 4) + attack_data.damage) * character_enemy.damage_boost)
     print_delayed('\nTilly left a Dead Mouse Surprise!', next_attack_delay)
-    print_delayed('...Wait, is it dead?', standard_delay)
+    print_delayed('...Wait, is it actually dead?', standard_delay)
     print_delayed('Tilly left an Alive Mouse Surprise!', standard_delay)
-    print_delayed('Oh no! The mouse is still alive! Linda fled from the room!', standard_delay)
+    print_delayed('Oh no! The mouse was still alive! Linda fled from the room!', standard_delay)
     print_delayed(f'{character_enemy.name} did {damage} points of damage to Linda.', standard_delay)
     decrement_health(character_mom, damage)
 
@@ -627,11 +806,6 @@ def sit_there():
 
 
 
-
-
-
-
-
 def init_game_data():
     '''
     Initialize all game data
@@ -657,9 +831,9 @@ def init_attack_data():
     dict_attacks[Attacks.INSIST_ON_UBER] = Attack(Attacks.INSIST_ON_UBER, 17, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.CHANGE_SUBJECT] = Attack(Attacks.CHANGE_SUBJECT, 17, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.INSIST_DINNER_LINDA] = Attack(Attacks.INSIST_DINNER_LINDA, 13, Targets.ENEMY, Effects.NONE)
-    dict_attacks[Attacks.AIR_CANNON] = Attack(Attacks.AIR_CANNON, 5, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.AIR_CANNON] = Attack(Attacks.AIR_CANNON, 10, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.CALL_GABE] = Attack(Attacks.CALL_GABE, 15, Targets.ENEMY, Effects.NONE)
-    dict_attacks[Attacks.YELL_AT_TILLY] = Attack(Attacks.YELL_AT_TILLY, 10, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.YELL_AT_TILLY] = Attack(Attacks.YELL_AT_TILLY, 5, Targets.ENEMY, Effects.NONE)
 
     # Greg's Attacks
     dict_attacks[Attacks.MILD_SEXISM] = Attack(Attacks.MILD_SEXISM, 10, Targets.ENEMY, Effects.NONE)
