@@ -25,7 +25,7 @@ dict_enemies = {}
 dict_effects = {}
 dict_attacks = {}
 # TODO: Fix order!!
-enemy_order = [greg_name, gabe_name, cookies_name, pionteks_name, tilly_name, noah_name]
+enemy_order = [greg_name, pionteks_name, tilly_name, noah_name, gabe_name, cookies_name]
 current_character_enemy_index = 0
 score = 0
 
@@ -387,7 +387,7 @@ def bake_cookies():
     print_delayed('Linda baked some chocolate chip cookies.', standard_delay)
     if character_enemy == dict_enemies[cookies_name]:
         print_delayed(instant_kill, standard_delay)
-        print_delayed('The store-bought cookies could not compete!', standard_delay)
+        print_delayed('The store-bought cookies could not compete!', 3)
         end_battle(character_enemy)
     elif character_enemy == dict_enemies[gabe_name]:
         if character_enemy.active_effect.name == Effects.LOW_BLOOD_SUGAR:
@@ -829,7 +829,7 @@ def init_attack_data():
     dict_attacks[Attacks.YAY] = Attack(Attacks.YAY, 20, Targets.SELF, Effects.NONE)
     dict_attacks[Attacks.BIG_SALE] = Attack(Attacks.BIG_SALE, 20, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.GIVE_ADVICE] = Attack(Attacks.GIVE_ADVICE, 15, Targets.ENEMY, Effects.NONE)
-    dict_attacks[Attacks.INCORRECT_REFERENCE] = Attack(Attacks.INCORRECT_REFERENCE, 15, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.INCORRECT_REFERENCE] = Attack(Attacks.INCORRECT_REFERENCE, 16, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.GABE_COAT] = Attack(Attacks.GABE_COAT, 15, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.LONG_TIME_MAKEUP] = Attack(Attacks.LONG_TIME_MAKEUP, 10, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.WATER_DOWN_COFFEE] = Attack(Attacks.WATER_DOWN_COFFEE, 15, Targets.ENEMY, Effects.NONE)
@@ -870,7 +870,7 @@ def init_attack_data():
     dict_attacks[Attacks.HERPDY_DERP] = Attack(Attacks.HERPDY_DERP, 0, Targets.ENEMY, Effects.SKIP_NEXT_TURN)
 
     # Store-Bought Cookie's Attacks
-    dict_attacks[Attacks.LOOK_TASTY] = Attack(Attacks.LOOK_TASTY, 1, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.LOOK_TASTY] = Attack(Attacks.LOOK_TASTY, 3, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.SIT_THERE] = Attack(Attacks.SIT_THERE, 0, Targets.ENEMY, Effects.NONE)
 
     return
@@ -881,7 +881,7 @@ def init_character_data():
     dict_enemies[tilly_name] = Character(tilly_name, 50, [scarf_and_barf, dead_mouse, alive_mouse, hairball], dict_effects[Effects.NONE])
     dict_enemies[noah_name] = Character(noah_name, 100, [toxic_fart, hanger, say_fam, herpdy_derp], dict_effects[Effects.NONE])
     dict_enemies[gabe_name] = Character(gabe_name, 100, [sleep_till_3, gabe_out, gabe_stop, obscure_reference], dict_effects[Effects.NONE])
-    dict_enemies[cookies_name] = Character(cookies_name, -1, [look_tasty, sit_there], dict_effects[Effects.NONE])
+    dict_enemies[cookies_name] = Character(cookies_name, 1000, [look_tasty, sit_there], dict_effects[Effects.NONE])
 
 def init_effect_data():
     dict_effects[Effects.NONE] = Effect(Effects.NONE, '', -1)
