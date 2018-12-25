@@ -100,7 +100,8 @@ def apply_active_effect(character):
         return True
     elif character.active_effect.name == Effects.POISON:
         print_delayed(f'{character.name} took 10 points of toxic damage from the lingering fart!', standard_delay)
-        character.decrement_health(10)
+        damage = math.ceil((random.randint(-1, 4) + 10))
+        decrement_health(character, damage)
         if battle_over:
             return True
         return False
@@ -108,7 +109,8 @@ def apply_active_effect(character):
         print_delayed(f'{character.name} is confused!', standard_delay)
         if random.randint(0,10) < 5:
             print_delayed(f'{character.name} hurt herself in her confusion!', standard_delay)
-            character.decrement_health(10)
+            damage = math.ceil((random.randint(-1, 4) + 15))
+            decrement_health(character, damage)
             if battle_over:
                 return True
             return True
@@ -152,7 +154,7 @@ def eat_out():
     start_battle()
 
 
-@when("go to body pump class", context='break')
+@when("go to body pump", context='break')
 def go_to_body_pump():
     print_delayed('Linda went to Body Pump.', standard_delay)
     print_delayed('Linda got PUMPED! Linda\'s attack damage increased!', standard_delay)
@@ -513,7 +515,7 @@ def insist_on_uber():
         enemy_turn()
         return
 
-@when("use the air cannon", context='attacking.Tilly')
+@when("air cannon", context='attacking.Tilly')
 def air_cannon():
     if apply_active_effect(character_mom):
         if battle_over:
@@ -821,7 +823,7 @@ def init_attack_data():
     dict_attacks[Attacks.COOKIES] = Attack(Attacks.COOKIES, 0, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.KICK] = Attack(Attacks.KICK, 40, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.BACH] = Attack(Attacks.BACH, 7, Targets.ENEMY, Effects.NONE)
-    dict_attacks[Attacks.YAY] = Attack(Attacks.YAY, 15, Targets.SELF, Effects.NONE)
+    dict_attacks[Attacks.YAY] = Attack(Attacks.YAY, 20, Targets.SELF, Effects.NONE)
     dict_attacks[Attacks.BIG_SALE] = Attack(Attacks.BIG_SALE, 20, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.GIVE_ADVICE] = Attack(Attacks.GIVE_ADVICE, 15, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.INCORRECT_REFERENCE] = (Attacks.INCORRECT_REFERENCE, 15, Targets.ENEMY, Effects.NONE)
@@ -951,9 +953,9 @@ def start_battle():
 
 
 def increment_score(num_turns_in_battle):
-    if num_turns_in_battle <= 10:
+    if num_turns_in_battle <= 7:
         return 20
-    elif num_turns_in_battle <= 20:
+    elif num_turns_in_battle <= 14:
         return 10
     else:
         return 5
