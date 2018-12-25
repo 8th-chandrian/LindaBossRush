@@ -83,7 +83,7 @@ def apply_active_effect(character):
         return False
 
     # Check if effect is still active
-    if character.active_effect.turns_effective == 0:
+    if character.active_effect.turns_effective <= 0:
         if character.active_effect.name == Effects.SUPER_RELAXED:
             print_delayed(f'{character.name} is no longer super relaxed.', standard_delay)
         elif character.active_effect.name == Effects.CONFUSION:
@@ -471,7 +471,7 @@ def long_time_makeup():
         enemy_turn()
         return
 
-@when("water down the coffee", context='attacking.Noah')
+@when("water down coffee", context='attacking.Noah')
 def water_down_coffee():
     if apply_active_effect(character_mom):
         if battle_over:
@@ -789,7 +789,6 @@ def herpdy_derp():
     attack_data = dict_attacks[Attacks.HERPDY_DERP]
     print_delayed('\nNoah said "herpdy derp"!', next_attack_delay)
     print_delayed('Linda cracked up!', standard_delay)
-    print_delayed('Linda\'s next turn was skipped!', standard_delay)
     character_mom.active_effect = copy.deepcopy(dict_effects[Effects.SKIP_NEXT_TURN])
 
 ##### Store-Bought Cookies' Attacks #####
@@ -888,8 +887,8 @@ def init_effect_data():
     dict_effects[Effects.CONFUSION] = Effect(Effects.CONFUSION, 'Linda became confused!', 2)
     dict_effects[Effects.LOW_BLOOD_SUGAR] = Effect(Effects.LOW_BLOOD_SUGAR, '\nGabe got low blood sugar!\nGsbe\'s attack increased 50%!', -1)
     dict_effects[Effects.POISON] = Effect(Effects.POISON, 'Linda was poisoned by Noah\'s farts!', 3)
-    dict_effects[Effects.SKIP_NEXT_TURN] = Effect(Effects.SKIP_NEXT_TURN, 'Linda\'s turn was skipped!', -1)
-    dict_effects[Effects.SUPER_RELAXED] = Effect(Effects.SUPER_RELAXED, 'Linda became super relaxed!\nLinda is now invincible!', 2)
+    dict_effects[Effects.SKIP_NEXT_TURN] = Effect(Effects.SKIP_NEXT_TURN, 'Linda\'s turn was skipped!', 1)
+    dict_effects[Effects.SUPER_RELAXED] = Effect(Effects.SUPER_RELAXED, 'Linda became super relaxed!', 2)
 
 
 def print_start_of_game_text():
@@ -1001,8 +1000,8 @@ def end_battle(losing_character):
 
 def print_end_game_text():
     print_delayed(congrats, 3)
-    print_delayed(f'You have defeated all bosses! Your total score is {score}!', standard_delay)
-    print_delayed(list_of_rewards, standard_delay)
+    print_delayed(f'You have defeated all bosses! Your total score is {score}!', 3)
+    print_delayed(list_of_rewards, 3)
 
 def main():
     set_context('attacking.Greg')
