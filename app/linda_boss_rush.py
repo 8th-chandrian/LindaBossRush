@@ -1,4 +1,5 @@
 import copy
+import math
 import random
 import sys
 import time
@@ -56,7 +57,10 @@ def decrement_health(character, health_lost):
     :param health_lost:
     '''
     if health_lost >= character.health_remaining:
-        print_delayed(f'{character.name} was defeated!', standard_delay)
+        if character == dict_enemies[pionteks_name]:
+            print_delayed(f'\n{character.name} were defeated!', standard_delay)
+        else:
+            print_delayed(f'\n{character.name} was defeated!', standard_delay)
         end_battle(character)
         return
     else:
@@ -313,8 +317,8 @@ def change_subject():
         enemy_turn()
         return
 
-@when("yay!", context='attacking.The Piontek Siblings')
-@when("yay!", context='attacking.Noah')
+@when("yay", context='attacking.The Piontek Siblings')
+@when("yay", context='attacking.Noah')
 def yay():
     if apply_active_effect(character_mom):
         if battle_over:
@@ -329,7 +333,7 @@ def yay():
     healing = attack_data.damage
     print_delayed('Linda used "yay!"', standard_delay)
     print_delayed(f'Linda was happy! Linda healed {healing} points of damage!', standard_delay)
-    increment_health(character_enemy, healing)
+    increment_health(character_mom, healing)
     if battle_over:
         return
     else:
@@ -583,7 +587,7 @@ def view_inventory():
 
 def mild_sexism():
     attack_data = dict_attacks[Attacks.MILD_SEXISM]
-    damage = attack_data.damage * character_enemy.damage_boost
+    damage = math.ceil(attack_data.damage * character_enemy.damage_boost)
     print_delayed('\nGreg said something mildly sexist!', next_attack_delay)
     print_delayed('Come on, dude...', standard_delay)
     print_delayed(f'{character_enemy.name} did {damage} points of damage to Linda.', standard_delay)
@@ -591,7 +595,7 @@ def mild_sexism():
 
 def sell_company():
     attack_data = dict_attacks[Attacks.SELL_COMPANY]
-    damage = attack_data.damage * character_enemy.damage_boost
+    damage = math.ceil(attack_data.damage * character_enemy.damage_boost)
     print_delayed('\nGreg sold Brand Integrity for fat stacks of cash!', next_attack_delay)
     print_delayed('Linda now works for Reward Gateway...what a cruddy name.', standard_delay)
     print_delayed(f'{character_enemy.name} did {damage} points of damage to Linda.', standard_delay)
@@ -599,7 +603,7 @@ def sell_company():
 
 def ignore_advice():
     attack_data = dict_attacks[Attacks.IGNORE_ADVICE]
-    damage = attack_data.damage * character_enemy.damage_boost
+    damage = math.ceil(attack_data.damage * character_enemy.damage_boost)
     print_delayed('\nGreg ignored the frankly quite helful advice of his underlings...', next_attack_delay)
     print_delayed('...hurting himself in the process.', standard_delay)
     print_delayed(f'{character_enemy.name} did {damage} points of damage to Linda.', standard_delay)
@@ -609,7 +613,7 @@ def ignore_advice():
 
 def blame_linda():
     attack_data = dict_attacks[Attacks.IGNORE_ADVICE]
-    damage = attack_data.damage * character_enemy.damage_boost
+    damage = math.ceil(attack_data.damage * character_enemy.damage_boost)
     print_delayed('\nGreg blamed Linda for something he did!', next_attack_delay)
     print_delayed(f'{character_enemy.name} did {damage} points of damage to Linda.', standard_delay)
     decrement_health(character_mom, damage)
@@ -618,7 +622,7 @@ def blame_linda():
 ##### Piontek Siblings' Attacks #####
 def vote_trump():
     attack_data = dict_attacks[Attacks.VOTE_TRUMP]
-    damage = attack_data.damage * character_enemy.damage_boost
+    damage = math.ceil(attack_data.damage * character_enemy.damage_boost)
     print_delayed('\nThe Piontek Siblings voted for Trump!', next_attack_delay)
     print_delayed('Okay, great, whatever. Why are you telling me this?', standard_delay)
     print_delayed(f'{character_enemy.name} did {damage} points of damage to Linda.', standard_delay)
@@ -626,7 +630,7 @@ def vote_trump():
 
 def insist_dinner_siblings():
     attack_data = dict_attacks[Attacks.INSIST_DINNER_SIBLINGS]
-    damage = attack_data.damage * character_enemy.damage_boost
+    damage = math.ceil(attack_data.damage * character_enemy.damage_boost)
     print_delayed('\nThe Piontek Siblings insisted on paying for dinner!', next_attack_delay)
     print_delayed('Linda felt bad for not paying.', standard_delay)
     print_delayed(f'{character_enemy.name} did {damage} points of damage to Linda.', standard_delay)
@@ -634,7 +638,7 @@ def insist_dinner_siblings():
 
 def pick_on_linda():
     attack_data = dict_attacks[Attacks.PICK_ON_LINDA]
-    damage = attack_data.damage * character_enemy.damage_boost
+    damage = math.ceil(attack_data.damage * character_enemy.damage_boost)
     print_delayed('\nThe Piontek Siblings picked on Linda!', next_attack_delay)
     print_delayed('Linda felt awkward.', standard_delay)
     print_delayed(f'{character_enemy.name} did {damage} points of damage to Linda.', standard_delay)
@@ -644,7 +648,7 @@ def pick_on_linda():
 ##### Tilly's Attacks #####
 def scarf_and_barf():
     attack_data = dict_attacks[Attacks.SCARF_AND_BARF]
-    damage = attack_data.damage * character_enemy.damage_boost
+    damage = math.ceil(attack_data.damage * character_enemy.damage_boost)
     print_delayed('\nTilly scarf\'n\'barfed!', next_attack_delay)
     print_delayed('Ewww! Gaaaabe!', standard_delay)
     print_delayed(f'{character_enemy.name} did {damage} points of damage to Linda.', standard_delay)
@@ -652,7 +656,7 @@ def scarf_and_barf():
 
 def dead_mouse():
     attack_data = dict_attacks[Attacks.DEAD_MOUSE]
-    damage = attack_data.damage * character_enemy.damage_boost
+    damage = math.ceil(attack_data.damage * character_enemy.damage_boost)
     print_delayed('\nTilly left a Dead Mouse Surprise!', next_attack_delay)
     print_delayed('Linda felt bad for that poor mouse.', standard_delay)
     print_delayed(f'{character_enemy.name} did {damage} points of damage to Linda.', standard_delay)
@@ -660,7 +664,7 @@ def dead_mouse():
 
 def alive_mouse():
     attack_data = dict_attacks[Attacks.ALIVE_MOUSE]
-    damage = attack_data.damage * character_enemy.damage_boost
+    damage = math.ceil(attack_data.damage * character_enemy.damage_boost)
     print_delayed('\nTilly left a Dead Mouse Surprise!', next_attack_delay)
     print_delayed('...Wait, is it dead?', standard_delay)
     print_delayed('Tilly left an Alive Mouse Surprise!', standard_delay)
@@ -670,7 +674,7 @@ def alive_mouse():
 
 def hairball():
     attack_data = dict_attacks[Attacks.HAIRBALL]
-    damage = attack_data.damage * character_enemy.damage_boost
+    damage = math.ceil(attack_data.damage * character_enemy.damage_boost)
     print_delayed('\nTilly hacked up a hairball!', next_attack_delay)
     print_delayed('Gross!', standard_delay)
     print_delayed(f'{character_enemy.name} did {damage} points of damage to Linda.', standard_delay)
@@ -679,7 +683,7 @@ def hairball():
 ##### Gabe's Attacks #####
 def sleep_till_3():
     attack_data = dict_attacks[Attacks.SLEEP_TILL_3]
-    damage = attack_data.damage
+    damage = math.ceil(attack_data.damage * character_enemy.damage_boost)
     if attack_data.is_disabled:
         print_delayed('\nGabe tried to go to sleep, but Linda was playing Bach.', next_attack_delay)
     else:
@@ -690,7 +694,7 @@ def sleep_till_3():
 
 def gabe_out():
     attack_data = dict_attacks[Attacks.GABE_OUT]
-    damage = attack_data.damage * character_enemy.damage_boost
+    damage = math.ceil(attack_data.damage * character_enemy.damage_boost)
     print_delayed('\nGabe said "Gabe out."', next_attack_delay)
     print_delayed('He is now hiding behind a wall of five screens.', standard_delay)
     print_delayed(f'{character_enemy.name} did {damage} points of damage to Linda.', standard_delay)
@@ -698,7 +702,7 @@ def gabe_out():
 
 def gabe_stop():
     attack_data = dict_attacks[Attacks.GABE_STOP]
-    damage = attack_data.damage * character_enemy.damage_boost
+    damage = math.ceil(attack_data.damage * character_enemy.damage_boost)
     print_delayed('\nGabe said "STOP."', next_attack_delay)
     print_delayed('Jeez, alright, alright.', standard_delay)
     print_delayed(f'{character_enemy.name} did {damage} points of damage to Linda.', standard_delay)
@@ -708,18 +712,18 @@ def obscure_reference():
     attack_data = dict_attacks[Attacks.OBSCURE_REFERENCE]
     print_delayed('\nGabe made an obscure reference to some video game called Nichijou or something.', next_attack_delay)
     print_delayed('He chuckles to himself. Linda became confused!', standard_delay)
-    # TODO: make confusion work
+    character_mom.active_effect = copy.deepcopy(dict_effects[Effects.CONFUSION])
 
 ##### Noah's Attacks #####
 def toxic_fart():
     attack_data = dict_attacks[Attacks.TOXIC_FART]
     print_delayed('\nNoah let out a fart!', next_attack_delay)
-    print_delayed('It\'s so toxic that Linda became poisoned!', standard_delay)
-    # TODO: make poison work
+    print_delayed('The fart lingered, permeating the area with its toxicity. Linda became poisoned!', standard_delay)
+    character_mom.active_effect = copy.deepcopy(dict_effects[Effects.POISON])
 
 def hanger():
     attack_data = dict_attacks[Attacks.HANGER]
-    damage = attack_data.damage * character_enemy.damage_boost
+    damage = math.ceil(attack_data.damage * character_enemy.damage_boost)
     print_delayed('\nNoah hasn\'t eaten in a while.', next_attack_delay)
     print_delayed('Noah\'s hanger boiled over!', standard_delay)
     print_delayed(f'{character_enemy.name} did {damage} points of damage to Linda.', standard_delay)
@@ -727,7 +731,7 @@ def hanger():
 
 def say_fam():
     attack_data = dict_attacks[Attacks.SAY_FAM]
-    damage = attack_data.damage * character_enemy.damage_boost
+    damage = math.ceil(attack_data.damage * character_enemy.damage_boost)
     print_delayed('\nNoah said the word "fam"!', next_attack_delay)
     print_delayed('Noah broke the Shema Accord! Gabe became enraged!', standard_delay)
     print_delayed(f'Gabe did {damage} points of damage to Linda.', standard_delay)
@@ -740,12 +744,12 @@ def herpdy_derp():
     print_delayed('\nNoah said "herpdy derp"!', next_attack_delay)
     print_delayed('Linda cracked up!', standard_delay)
     print_delayed('Linda\'s turn was skipped!', standard_delay)
-    # TODO: Get turn skipping to work
+    character_mom.active_effect = copy.deepcopy(dict_effects[Effects.SKIP_NEXT_TURN])
 
 ##### Store-Bought Cookies' Attacks #####
 def look_tasty():
     attack_data = dict_attacks[Attacks.LOOK_TASTY]
-    damage = attack_data.damage * character_enemy.damage_boost
+    damage = math.ceil(attack_data.damage * character_enemy.damage_boost)
     print_delayed('\nThe store-bought cookies look pretty tasty...', next_attack_delay)
     print_delayed('Linda tried one.', standard_delay)
     print_delayed('They\'re nasty!', standard_delay)
@@ -768,12 +772,7 @@ def sit_there():
 
 def init_game_data():
     '''
-    TODO: This function will load hardcoded game data from JSON file(s) as well as initializing various data structures
-
-    We will initialize the character_mom global with Mom's character object here, as well as the dict of enemy character
-    objects.
-
-    We will also initialize the dict of attacks within attacks.py by calling the 'load_attack_data' function
+    Initialize all game data
     '''
     init_effect_data()
     init_attack_data()
@@ -901,7 +900,16 @@ def start_battle():
     new_context = 'attacking.'+character_enemy.name
     set_context(new_context)
     print_delayed('\n\nNext combatant:', 3)
-    print_delayed(f'{character_enemy.name}!!!!\n\n', next_attack_delay)
+    print_delayed(f'{character_enemy.name}!!!!\n', next_attack_delay)
+
+
+def increment_score(num_turns_in_battle):
+    if num_turns_in_battle <= 7:
+        return 20
+    elif num_turns_in_battle <= 12:
+        return 10
+    else:
+        return 5
 
 
 def end_battle(losing_character):
@@ -921,8 +929,8 @@ def end_battle(losing_character):
         print_delayed('Because Tilly escaped defeat, Linda did not gain any points', standard_delay)
     else:
         global score
-        score += 10
-        # TODO: Increment Mom's points here and print notification of current points held
+        score += increment_score(num_turns_in_battle)
+        print_delayed(f'Your current score: {score}', standard_delay)
 
     if character_enemy == dict_enemies[cookies_name]:
         print_end_game_text()
