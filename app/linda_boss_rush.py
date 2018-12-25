@@ -147,8 +147,8 @@ def drink_red_wine():
 @when("eat out at jojo", context='break')
 def eat_out():
     print_delayed('Linda went out and got dinner at Jojo', standard_delay)
-    print_delayed('It was a really good dinner. Linda healed 60 points of damage!', standard_delay)
-    increment_health(character_mom, 60)
+    print_delayed('It was a really good dinner. Linda healed back to full health!', standard_delay)
+    increment_health(character_mom, character_mom.max_health)
     start_battle()
 
 
@@ -600,8 +600,8 @@ def use_item(item):
         inventory.remove(item)
         print_delayed(f'Linda used {item}', standard_delay)
         if item.lower() == 'dark chocolate':
-            print_delayed('Linda was healed for 20 points!', standard_delay)
-            increment_health(character_mom, 20)
+            print_delayed('Linda was healed for 30 points!', standard_delay)
+            increment_health(character_mom, 30)
         elif item.lower() == 'coffee':
             print_delayed('Linda got wired! Linda\'s attack damage increased!', standard_delay)
             character_mom.damage_boost += 0.5
@@ -874,9 +874,9 @@ def init_character_data():
     dict_enemies[greg_name] = Character(greg_name, 100, [mild_sexism, sell_company, ignore_advice, blame_linda], dict_effects[Effects.NONE])
     dict_enemies[pionteks_name] = Character(pionteks_name, 100, [vote_trump, insist_dinner_siblings, pick_on_linda], dict_effects[Effects.NONE])
     dict_enemies[tilly_name] = Character(tilly_name, 50, [scarf_and_barf, dead_mouse, alive_mouse, hairball], dict_effects[Effects.NONE])
-    dict_enemies[noah_name] = Character(noah_name, 100, None, dict_effects[Effects.NONE])
-    dict_enemies[gabe_name] = Character(gabe_name, 100, None, dict_effects[Effects.NONE])
-    dict_enemies[cookies_name] = Character(cookies_name, -1, None, dict_effects[Effects.NONE])
+    dict_enemies[noah_name] = Character(noah_name, 100, [toxic_fart, hanger, say_fam, herpdy_derp], dict_effects[Effects.NONE])
+    dict_enemies[gabe_name] = Character(gabe_name, 100, [sleep_till_3, gabe_out, gabe_stop, obscure_reference], dict_effects[Effects.NONE])
+    dict_enemies[cookies_name] = Character(cookies_name, -1, [look_tasty, sit_there], dict_effects[Effects.NONE])
 
 def init_effect_data():
     dict_effects[Effects.NONE] = Effect(Effects.NONE, '', -1)
@@ -944,16 +944,16 @@ def start_battle():
         print_delayed('The one...', 1)
         print_delayed('The only...', 1)
         print_delayed('STORE-BOUGHT CHOCOLATE CHIP COOKIES!!!!!', 3)
-        print_delayed('(ooh, the horror!)\n', 1)
+        print_delayed('(ooh, the horror!)', 1)
     else:
         print_delayed('\n\nNext combatant:', 3)
-        print_delayed(f'{character_enemy.name}!!!\n', next_attack_delay)
+        print_delayed(f'{character_enemy.name}!!!', next_attack_delay)
 
 
 def increment_score(num_turns_in_battle):
-    if num_turns_in_battle <= 7:
+    if num_turns_in_battle <= 10:
         return 20
-    elif num_turns_in_battle <= 12:
+    elif num_turns_in_battle <= 20:
         return 10
     else:
         return 5
