@@ -111,6 +111,7 @@ def apply_active_effect(character):
         if random.randint(0,10) < 5:
             print_delayed(f'{character.name} hurt herself in her confusion!', standard_delay)
             damage = math.ceil((random.randint(-1, 4) + 15))
+            print_delayed(f'{character.name} took {damage} points of damage', standard_delay)
             decrement_health(character, damage)
             if battle_over:
                 return True
@@ -829,7 +830,7 @@ def init_attack_data():
     dict_attacks[Attacks.BIG_SALE] = Attack(Attacks.BIG_SALE, 20, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.GIVE_ADVICE] = Attack(Attacks.GIVE_ADVICE, 15, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.INCORRECT_REFERENCE] = Attack(Attacks.INCORRECT_REFERENCE, 15, Targets.ENEMY, Effects.NONE)
-    dict_attacks[Attacks.GABE_COAT] = Attack(Attacks.GABE_COAT, 20, Targets.ENEMY, Effects.NONE)
+    dict_attacks[Attacks.GABE_COAT] = Attack(Attacks.GABE_COAT, 15, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.LONG_TIME_MAKEUP] = Attack(Attacks.LONG_TIME_MAKEUP, 10, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.WATER_DOWN_COFFEE] = Attack(Attacks.WATER_DOWN_COFFEE, 15, Targets.ENEMY, Effects.NONE)
     dict_attacks[Attacks.INSIST_ON_UBER] = Attack(Attacks.INSIST_ON_UBER, 17, Targets.ENEMY, Effects.NONE)
